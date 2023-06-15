@@ -210,8 +210,43 @@ public class Padaria {
     }
 
     public void removerCliente(Scanner scanner) throws NoCpfInDatabaseException{
+        if(this.clientes.size() == 0){
+            System.out.println("Não há clientes cadastrados!");
+            return;
+        }
 
+        boolean cpfValido = false;
+        boolean cpfEncontrado = false;
+        String cpf = null;
+        while(!cpfValido){
+            try{
+                System.out.print("Digite o CPF do cliente que deseja remover: ");
+                cpf = scanner.nextLine();
+            }catch(Exception e){
+                System.out.println("CPF inválido!");
+            }
+            if(cpf.length() != 11){
+                System.out.println("CPF inválido!");
+            }else{
+                cpfValido = true;
+            }
+        }
+
+        for(int i = 0; i < this.clientes.size(); i++){
+            if(this.clientes.get(i).getCpf().equals(cpf)){
+                this.clientes.remove(i);
+                cpfEncontrado = true;
+                break;
+            }
+        }
+
+        if(cpfEncontrado){
+            System.out.println("Cliente removido com sucesso!");
+        }else{
+            throw new NoCpfInDatabaseException("CPF não encontrado no banco de dados!", cpf);
+        }
     }
+    
 
     public void exibirClientes(){
         System.out.println("Clientes: ");
