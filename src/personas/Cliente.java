@@ -43,6 +43,9 @@ public class Cliente extends Pessoa{
         System.out.println("CPF: " + this.cpf);
         System.out.println("Sexo: " + this.sexo);
         System.out.println("Idade: " + this.idade);
+        System.out.println("Endereço: " + this.endereco);
+        System.out.println("Telefone: " + this.telefone);
+        System.out.println("Número de compras: " + this.numero_de_compras);
         System.out.println("--------------------");
     }
     
