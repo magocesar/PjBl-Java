@@ -535,7 +535,7 @@ public class Padaria {
         if(cpfEncontrado){
             System.out.println("Funcionário removido com sucesso!");
         }else{
-            throw new NoCpfInDatabaseException();
+            throw new NoCpfInDatabaseException("CPF não encontrado no banco de dados!", cpf);
         }
     }
 }
