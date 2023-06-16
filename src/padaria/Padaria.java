@@ -900,13 +900,13 @@ public class Padaria {
 
             switch(opcao){
                 case "1":
-                    adicionarProdutoIndustrializado();
+                    adicionarProdutoIndustrializado(scanner);
                     break;
                 case "2":
-                    adicionarProdutoProduzido();
+                    adicionarProdutoProduzido(scanner);
                     break;
                 case "3":
-                    adicionarIngrediente();
+                    adicionarIngrediente(scanner);
                     break;
                 case "0":
                     System.out.println("Voltando ao menu principal...");
