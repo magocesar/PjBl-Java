@@ -5,7 +5,6 @@ import java.util.Scanner;
 import excep.NoCpfInDatabaseException;
 import excep.NoIdInDatabaseException;
 import produtos.*;
-import padaria.*;
 
 public class estoque {
     private ArrayList<produtoIndustrializado> produtoIndustrializados = new ArrayList<produtoIndustrializado>();
@@ -162,8 +161,8 @@ public class estoque {
         System.out.println("Preço: " + preco);
         System.out.println("Descrição: " + descricao);
         System.out.println("Fabricante: " + fabricante);
-        System.out.println("Data de Fabricação: " + dataDeFabricacao);
-        System.out.println("Data de Validade: " + dataDeValidade);
+        System.out.println("Data de fabricação: " + dataDeFabricacao);
+        System.out.println("Data de validade: " + dataDeValidade);
         System.out.println("--------------------");
 
         boolean opcaoValida = false;

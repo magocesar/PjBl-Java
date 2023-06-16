@@ -160,6 +160,7 @@ public class Padaria {
             System.out.println("\n--------------------");
             System.out.println("Digite o tipo de funcionário que deseja adicionar: ");
             System.out.println("1 - Atendente");
+            System.out.println("2 - Padeiro");
             System.out.println("--------------------");
             System.out.println("Para voltar, digite '0'");
             System.out.println("--------------------");
@@ -179,6 +180,10 @@ public class Padaria {
             switch (opcao) {
                 case "1":
                     this.adicionarAtendente(scanner);
+                    break;
+
+                case "2":
+                    this.adicionarPadeiro(scanner);
                     break;
             
                 case "0":
@@ -395,6 +400,209 @@ public class Padaria {
         return;
     }
 
+    public void adicionarPadeiro(Scanner scanner){
+        String nome = null;
+        String cpf = null;
+        String sexo = null;
+        int idade = 0;
+        double salario = 0;
+        String turno = null;
+
+        System.out.println("\n--------------------");
+        System.out.println("Adicionar Atendente");
+        System.out.println("Caso deseja cancelar, digite '0' em qualquer campo.");
+        System.out.println("--------------------");
+
+
+        boolean nomeValido = false;
+        while(!nomeValido){
+            try{
+                System.out.print("Digite o nome do atendente: ");
+                nome = scanner.nextLine();
+            }catch(Exception e){
+                System.out.println("Nome inválido!");
+            }
+
+            if(nome.equals("0")){
+                System.out.println("Cancelando...");
+                return;
+            }
+
+            if(nome.length() == 0){
+                System.out.println("Nome inválido!");
+            }else{	
+                nomeValido = true;
+            }
+        }
+
+        boolean cpfValido = false;
+        while(!cpfValido){
+            try{
+                System.out.print("Digite o CPF do atendente: ");
+                cpf = scanner.nextLine();
+            }catch(Exception e){
+                System.out.println("CPF inválido!");
+            }
+
+            if(cpf.equals("0")){
+                System.out.println("Cancelando...");
+                return;
+            }
+
+            if(cpf.length() != 11){
+                System.out.println("CPF inválido!");
+            }else if(this.procurarCpf(cpf)){
+                System.out.println("CPF já cadastrado!");
+                return;
+            }
+            else{
+                cpfValido = true;
+            }
+        }
+
+        boolean sexoValido = false;
+        ArrayList<String> sexos = new ArrayList<String>(){
+            {
+                add("M");
+                add("F");
+            }
+        };
+        while(!sexoValido){
+            try{
+                System.out.print("Digite o sexo do atendente (M / F): ");
+                sexo = scanner.nextLine();
+            }catch(Exception e){
+                System.out.println("Sexo inválido!");
+            }
+
+            if(sexo.equals("0")){
+                System.out.println("Cancelando...");
+                return;
+            }
+
+            if(!sexos.contains(sexo)){
+                System.out.println("Sexo inválido, digite 'M' ou 'F'!");
+            }else{
+                sexoValido = true;
+            }
+        }
+
+        boolean idadeValida = false;
+        while(!idadeValida){
+            try{
+                System.out.print("Digite a idade do atendente: ");
+                idade = scanner.nextInt();
+            }catch(Exception e){
+                System.out.println("Idade inválida!");
+            }
+
+            if(idade == 0){
+                System.out.println("Cancelando...");
+                return;
+            }
+            
+            if(idade < 0){
+                System.out.println("Idade inválida!");
+            }else{
+                idadeValida = true;
+            }
+        }
+
+        boolean salarioValido = false;
+        while(!salarioValido){
+            try{
+                System.out.print("Digite o salário do atendente: ");
+                salario = scanner.nextDouble();
+            }catch(Exception e){
+                System.out.println("Salário inválido!");
+            }
+
+            if(salario == 0){
+                System.out.println("Cancelando...");
+                return;
+            }
+
+            if(salario < 1200){
+                System.out.println("Salário abaixo do mínimo (R$1200,00)");
+            }else{
+                salarioValido = true;
+            }
+        }
+
+        boolean turnoValido = false;
+        ArrayList<String> turnos = new ArrayList<String>(){
+            {
+                add("Manha");
+                add("Tarde");
+                add("Noite");
+            }
+        };
+
+        while(!turnoValido){
+            try{
+                System.out.print("Digite o turno do atendente: ");
+                turno = scanner.nextLine();
+            }catch(Exception e){
+                System.out.println("Turno inválido!");
+            }
+
+            if(turno.equals("0")){
+                System.out.println("Cancelando...");
+                return;
+            }
+
+            if(!turnos.contains(turno)){
+                System.out.println("Digite 'Manha', 'Tarde' ou 'Noite'!");
+            }else{
+                turnoValido = true;
+            }
+        }
+
+        System.out.println("--------------------");
+        System.out.println("Resumo dos dados inseridos: ");
+        System.out.println("Nome: " + nome);
+        System.out.println("CPF: " + cpf);
+        System.out.println("Sexo: " + sexo);
+        System.out.println("Idade: " + idade);
+        System.out.println("Função: Padeiro");
+        System.out.println("Salário: " + salario);
+        System.out.println("Turno: " + turno);
+        System.out.println("--------------------");
+
+        boolean opcaoValida = false;
+        String op = null;
+        ArrayList<String> opcoes = new ArrayList<String>(){
+            {
+                add("S");
+                add("N");
+            }
+        };
+
+        while(!opcaoValida){
+            try{
+                System.out.print("Confirmar? (S / N): ");
+                op = scanner.nextLine();
+            }catch(Exception e){
+                System.out.println("Opção inválida!");
+            }
+
+            if(!opcoes.contains(op)){
+                System.out.println("Opção inválida, digite 'S' ou 'N'!");
+            }else{
+                opcaoValida = true;
+            }
+        }
+
+        if(op.equals("N")){
+            System.out.println("Cancelando...");
+            return;
+        }
+
+        this.funcionarios.add(new Padeiro(nome, cpf, sexo, idade, salario, turno, 0));
+        System.out.println("Padeiro adicionado com sucesso!");
+        return;
+    }
+
     public void removerFuncionario(Scanner scanner) throws NoCpfInDatabaseException{
 
         if(this.funcionarios.size() == 0){
@@ -537,7 +745,6 @@ public class Padaria {
         }
     }
     
-
     public void adicionarCliente(Scanner scanner){
         //Verificar cpf duplicado posteriormente
         String nome = null;
@@ -808,7 +1015,6 @@ public class Padaria {
         }
     }
     
-
     public void exibirClientes(){
         System.out.println("Clientes: ");
         if(this.clientes.size() == 0){
@@ -821,10 +1027,6 @@ public class Padaria {
         }
     }
 
-
-
-
-    
     public void exibirMenuEstoque(Scanner scanner){
         String opcao = null;
         boolean sair = false;
@@ -916,7 +1118,6 @@ public class Padaria {
                     System.out.println("Opção inválida!");
                     break;
             }
-
         }
     }
 
@@ -943,13 +1144,13 @@ public class Padaria {
 
             switch(opcao){
                 case "1":
-                    removerProdutoIndustrializado();
+                    //removerProdutoIndustrializado();
                     break;
                 case "2":
-                    removerProdutoProduzido();
+                    //removerProdutoProduzido();
                     break;
                 case "3":
-                    removerIngrediente();
+                    //removerIngrediente();
                     break;
                 case "0":
                     System.out.println("Voltando ao menu principal...");
@@ -987,13 +1188,13 @@ public class Padaria {
 
             switch(opcao){
                 case "1":
-                    exibirProdutosIndustrializados();
+                    //exibirProdutosIndustrializados();
                     break;
                 case "2":
-                    exibirProdutosProduzidos();
+                    //exibirProdutosProduzidos();
                     break;
                 case "3":
-                    exibirIngredientes();
+                    //exibirIngredientes();
                     break;
                 case "0":
                     System.out.println("Voltando ao menu principal...");
