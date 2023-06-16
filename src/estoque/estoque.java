@@ -2,7 +2,6 @@ package estoque;
 import java.util.ArrayList;
 import java.util.Scanner;
 import produtos.*;
-import padaria.*;
 
 public class estoque {
     private ArrayList<produtoIndustrializado> produtoIndustrializados = new ArrayList<produtoIndustrializado>();
@@ -154,12 +153,11 @@ public class estoque {
         System.out.println("--------------------");
         System.out.println("Resumo dos dados inseridos: ");
         System.out.println("Nome: " + nome);
-        System.out.println("CPF: " + cpf);
-        System.out.println("Sexo: " + sexo);
-        System.out.println("Idade: " + idade);
-        System.out.println("Função: Atendente");
-        System.out.println("Salário: " + salario);
-        System.out.println("Turno: " + turno);
+        System.out.println("Preço: " + preco);
+        System.out.println("Descrição: " + descricao);
+        System.out.println("Fabricante: " + fabricante);
+        System.out.println("Data de fabricação: " + dataDeFabricacao);
+        System.out.println("Data de validade: " + dataDeValidade);
         System.out.println("--------------------");
 
         boolean opcaoValida = false;
