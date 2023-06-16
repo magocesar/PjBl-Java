@@ -38,4 +38,6 @@ public class Atendente extends Funcionario{
         System.out.println("Vendas realizadas: " + this.vendas_realizadas);
         System.out.println("--------------------");
     }
+
+    
 }

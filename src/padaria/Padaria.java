@@ -683,6 +683,48 @@ public class Padaria {
             }
         }
 
+        System.out.println("--------------------");
+        System.out.println("Confirmação de cadastro:");
+        System.out.println("Nome: " + nome);
+        System.out.println("CPF: " + cpf);
+        System.out.println("Sexo: " + sexo);
+        System.out.println("Idade: " + idade);
+        System.out.println("Endereço: " + endereco);
+        System.out.println("Telefone: " + telefone);
+        System.out.println("--------------------");
+        boolean opValida = false;
+        String op = null;
+        ArrayList<String> ops = new ArrayList<String>(){
+            {
+                add("S");
+                add("N");
+            }
+        };
+        while(!opValida){
+            try{
+                System.out.print("Confirmar cadastro? (S / N): ");
+                op = scanner.nextLine();
+            }catch(Exception e){
+                System.out.println("Opção inválida!");
+            }
+
+            if(op.equals("0")){
+                System.out.println("Cancelando...");
+                return;
+            }
+
+            if(!ops.contains(op)){
+                System.out.println("Opção inválida, digite 'S' ou 'N'!");
+            }else{
+                opValida = true;
+            }
+        }
+
+        if(op.equals("N")){
+            System.out.println("Cancelando...");
+            return;
+        }
+
         this.clientes.add(new Cliente(nome, cpf, sexo, idade, endereco, telefone, 0));
         System.out.println("Cliente adicionado com sucesso!");
         return;
@@ -699,11 +741,18 @@ public class Padaria {
         String cpf = null;
         while(!cpfValido){
             try{
+                System.out.print("Para cancelar digite '0'!\n");
                 System.out.print("Digite o CPF do cliente que deseja remover: ");
                 cpf = scanner.nextLine();
             }catch(Exception e){
                 System.out.println("CPF inválido!");
             }
+
+            if(cpf.equals("0")){
+                System.out.println("Cancelando...");
+                return;
+            }
+
             if(cpf.length() != 11){
                 System.out.println("CPF inválido!");
             }else{
@@ -713,6 +762,34 @@ public class Padaria {
 
         for(int i = 0; i < this.clientes.size(); i++){
             if(this.clientes.get(i).getCpf().equals(cpf)){
+                boolean opValida = false;
+                String op = null;
+                ArrayList<String> ops = new ArrayList<String>(){
+                    {
+                        add("S");
+                        add("N");
+                    }
+                };
+                while(!opValida){
+                    try{
+                        System.out.print("Confirma a remoção do cliente " + this.clientes.get(i).getNome() + "? (S / N): ");
+                        op = scanner.nextLine();
+                    }catch(Exception e){
+                        System.out.println("Opção inválida!");
+                    }
+
+                    if(!ops.contains(op)){
+                        System.out.println("Opção inválida, digite 'S' ou 'N'!");
+                    }else{
+                        opValida = true;
+                    }
+                }
+
+                if(op.equals("N")){
+                    System.out.println("Cancelando...");
+                    return;
+                }
+
                 this.clientes.remove(i);
                 cpfEncontrado = true;
                 break;
