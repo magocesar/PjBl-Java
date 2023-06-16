@@ -1,12 +1,11 @@
 package estoque;
 import java.util.ArrayList;
 import java.util.Scanner;
-
-import excep.NoCpfInDatabaseException;
 import excep.NoIdInDatabaseException;
 import produtos.*;
 
 public class estoque {
+    private int id = 1;
     private ArrayList<produtoIndustrializado> produtoIndustrializados = new ArrayList<produtoIndustrializado>();
 
     private ArrayList<produtoProduzido> produtoProduzido = new ArrayList<produtoProduzido>();
@@ -15,7 +14,6 @@ public class estoque {
 
 
     public void adicionarProdutoIndustrializado(Scanner scanner){
-        int id = 0;
         String nome = null; 
         double preco = 0;
         String descricao = null;
@@ -194,12 +192,12 @@ public class estoque {
             return;
         }
 
-        this.produtoIndustrializados.add(new produtoIndustrializado(id, nome, preco, descricao, fabricante, dataDeFabricacao, dataDeValidade));
+        this.produtoIndustrializados.add(new produtoIndustrializado(this.id, nome, preco, descricao, fabricante, dataDeFabricacao, dataDeValidade));
+        this.id++;
         System.out.println("Produto Industrializado adicionado com sucesso!");
     }
 
     public void adicionarProdutoProduzido(Scanner scanner){
-        int id = 0;
         String nome = null; 
         double preco = 0;
         String descricao = null;
@@ -378,12 +376,12 @@ public class estoque {
             return;
         }
 
-        this.produtoProduzido.add(new produtoProduzido(id, nome, preco, descricao, fabricante, dataDeFabricacao, dataDeValidade));
+        this.produtoProduzido.add(new produtoProduzido(this.id, nome, preco, descricao, fabricante, dataDeFabricacao, dataDeValidade));
+        this.id++;
         System.out.println("Produto Industrializado adicionado com sucesso!");
     }
 
     public void adicionarIngrediente(Scanner scanner){
-        int id = 0;
         String nome = null; 
         double preco = 0;
         String descricao = null;
@@ -562,7 +560,8 @@ public class estoque {
             return;
         }
 
-        this.ingredientes.add(new ingrediente(id, nome, preco, descricao, fabricante, dataDeFabricacao, dataDeValidade));
+        this.ingredientes.add(new ingrediente(this.id, nome, preco, descricao, fabricante, dataDeFabricacao, dataDeValidade));
+        this.id++;
         System.out.println("Produto Industrializado adicionado com sucesso!");
     }
 
@@ -787,4 +786,42 @@ public class estoque {
             throw new NoIdInDatabaseException("Id não encontrado no banco de dados!", id);
         }
     }
+
+    public void exibirProdutosIndustrializados(){
+        System.out.println("Produtos industrializados: ");
+        if(this.produtoIndustrializados.size() == 0){
+            System.out.println("Não há produtoIndustrializados cadastrados!");
+        }else{
+            for(int i = 0; i < this.produtoIndustrializados.size(); i++){
+                System.out.println("Produto Industrializado " + (i+1) + ": ");
+                this.produtoIndustrializados.get(i).exibirPrateleira();
+            }
+        }
+    }
+
+    public void exibirProdutosProduzidos(){
+        System.out.println("Produtos Produzidos: ");
+        if(this.produtoProduzido.size() == 0){
+            System.out.println("Não há Produtos Produzidos cadastrados!");
+        }else{
+            for(int i = 0; i < this.produtoProduzido.size(); i++){
+                System.out.println("Cliente " + (i+1) + ": ");
+                this.produtoProduzido.get(i).exibirPrateleira();
+            }
+        }
+    }
+
+    public void exibirIngredientes(){
+        System.out.println("Ingredientes: ");
+        if(this.ingredientes.size() == 0){
+            System.out.println("Não há Ingredientes cadastrados!");
+        }else{
+            for(int i = 0; i < this.ingredientes.size(); i++){
+                System.out.println("Cliente " + (i+1) + ": ");
+                this.ingredientes.get(i).exibirPrateleira();
+            }
+        }
+    }
+    
+    
 }
