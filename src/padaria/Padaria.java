@@ -3,6 +3,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import personas.*;
 import excep.*;
+import estoque.*;
 
 public class Padaria {
     private String nome;
@@ -58,6 +59,7 @@ public class Padaria {
             System.out.println("Sistema Padaria: " + this.nome);
             System.out.println("1 - Gerenciar Funcionários");
             System.out.println("2 - Gerenciar Clientes");
+            System.out.println("3 - Gerenciar Estoque");
             System.out.println("--------------------");
             System.out.println("Para sair do programa, digite '0'");
             System.out.println("--------------------");
@@ -80,6 +82,9 @@ public class Padaria {
                     break;
                 case "2":
                     exibirMenuCliente(scanner);;
+                    break;
+                case "3":
+                    exibirMenuEstoque(scanner);
                     break;
                 case "0":
                     System.out.println("Saindo do programa...");
@@ -812,6 +817,191 @@ public class Padaria {
             for(int i = 0; i < this.clientes.size(); i++){
                 System.out.println("Cliente " + (i+1) + ": ");
                 this.clientes.get(i).exibirDados();
+            }
+        }
+    }
+
+
+
+
+    
+    public void exibirMenuEstoque(Scanner scanner){
+        String opcao = null;
+        boolean sair = false;
+
+        while(!sair){
+            System.out.println("\n--------------------");
+            System.out.println("Gerenciar Estoque");
+            System.out.println("1 - Adicionar Produto");
+            System.out.println("2 - Remover Produto");
+            System.out.println("3 - Exibir Produtos");
+            System.out.println("--------------------");
+            System.out.println("Para voltar ao menu principal, digite '0'");
+            System.out.println("--------------------");
+
+            boolean opcao_valida = false;
+
+            while(!opcao_valida){
+                try{
+                    System.out.print("Digite a opção desejada: ");
+                    opcao = scanner.nextLine();
+                    opcao_valida = true;
+                }catch(Exception e){
+                    System.out.println("Opção inválida!");
+                }
+            }
+
+            switch (opcao) {
+                case "1":
+                    this.exibirMenuAdicionar(scanner);
+                    break;
+            
+                case "2":
+                    this.exibirMenuRemover(scanner);
+                    break;
+                case "3":
+                    this.exibirMenuExibirProdutos(scanner);
+                    break;
+
+                case "0":
+                    System.out.println("Voltando ao menu principal...");
+                    return;
+
+                default:
+                    System.out.println("Opção inválida!");
+                    break;
+            }
+        }
+    }
+
+    public void exibirMenuAdicionar(Scanner scanner){
+        String opcao = null;
+        boolean sair = false;
+
+        while(!sair){
+            System.out.println("\n--------------------");
+            System.out.println("1 - Adicionar produto industrializado");
+            System.out.println("2 - Adicionar produto produzido");
+            System.out.println("3 - Adicionar ingrediente");
+            System.out.println("0 - Voltar");
+            System.out.println("\n--------------------");
+            
+            boolean opcao_valida = false;
+
+            while(!opcao_valida){
+                try{
+                    System.out.print("Digite a opção desejada: ");
+                    opcao = scanner.nextLine();
+                    opcao_valida = true;
+                }catch(Exception e){
+                    System.out.println("Opção inválida!");
+                }
+            }
+
+            switch(opcao){
+                case "1":
+                    adicionarProdutoIndustrializado();
+                    break;
+                case "2":
+                    adicionarProdutoProduzido();
+                    break;
+                case "3":
+                    adicionarIngrediente();
+                    break;
+                case "0":
+                    System.out.println("Voltando ao menu principal...");
+                    return;
+
+                default:
+                    System.out.println("Opção inválida!");
+                    break;
+            }
+
+        }
+    }
+
+    public void exibirMenuRemover(Scanner scanner){
+        String opcao = null;
+        boolean sair = false;
+
+        while(!sair){
+            System.out.println("1 - Remover produto industrializado");
+            System.out.println("2 - Remover produto produzido");
+            System.out.println("3 - Remover ingrediente");
+            System.out.println("4 - Voltar");
+            boolean opcao_valida = false;
+
+            while(!opcao_valida){
+                try{
+                    System.out.print("Digite a opção desejada: ");
+                    opcao = scanner.nextLine();
+                    opcao_valida = true;
+                }catch(Exception e){
+                    System.out.println("Opção inválida!");
+                }
+            }
+
+            switch(opcao){
+                case "1":
+                    removerProdutoIndustrializado();
+                    break;
+                case "2":
+                    removerProdutoProduzido();
+                    break;
+                case "3":
+                    removerIngrediente();
+                    break;
+                case "0":
+                    System.out.println("Voltando ao menu principal...");
+                    return;
+
+                default:
+                    System.out.println("Opção inválida!");
+                    break;
+            }
+        }
+    }
+    
+    public void exibirMenuExibirProdutos(Scanner scanner){
+        String opcao = null;
+        boolean sair = false;
+
+        while(!sair){
+            System.out.println("\n--------------------");
+            System.out.println("1 - Exibir produtos industrializados");
+            System.out.println("2 - Exibir produtos produzidos");
+            System.out.println("3 - Exibir ingredientes");
+            System.out.println("0 - Voltar");
+            System.out.println("\n--------------------");
+            boolean opcao_valida = false;
+
+            while(!opcao_valida){
+                try{
+                    System.out.print("Digite a opção desejada: ");
+                    opcao = scanner.nextLine();
+                    opcao_valida = true;
+                }catch(Exception e){
+                    System.out.println("Opção inválida!");
+                }
+            }
+
+            switch(opcao){
+                case "1":
+                    exibirProdutosIndustrializados();
+                    break;
+                case "2":
+                    exibirProdutosProduzidos();
+                    break;
+                case "3":
+                    exibirIngredientes();
+                    break;
+                case "0":
+                    System.out.println("Voltando ao menu principal...");
+                    return;
+
+                default:
+                    System.out.println("Opção inválida!");
+                    break;
             }
         }
     }
