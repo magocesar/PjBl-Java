@@ -6,7 +6,9 @@ import padaria.*;
 
 public class estoque {
     private ArrayList<produtoIndustrializado> produtoIndustrializados = new ArrayList<produtoIndustrializado>();
+
     private ArrayList<produtoProduzido> produtoProduzido = new ArrayList<produtoProduzido>();
+    
     private ArrayList<ingrediente> ingredientes = new ArrayList<ingrediente>();
 
     
