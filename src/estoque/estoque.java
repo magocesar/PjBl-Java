@@ -191,6 +191,6 @@ public class estoque {
             return;
         }
 
-        this.produtoIndustrializados.add(new produtoIndustrializado(nome, preco, descricao, fabricante, dataDeFabricacao, dataDeValidade);
+        this.produtoIndustrializados.add(new produtoIndustrializado(nome, preco, descricao, fabricante, dataDeFabricacao, dataDeValidade));
     }
 }
