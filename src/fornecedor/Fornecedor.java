@@ -66,6 +66,15 @@ public class Fornecedor {
   }
 
   public void exibirDados(){
-    System.out.println("Nome: " + this.nome + "\nID: " + this.id + "\nCNPJ: " + this.cnpj + "\nEndereço: " + this.endereco + "\nTelefone: " + this.telefone + "\nEmail: " + this.email); 
+    System.out.println("--------------------");
+    System.out.println("Dados do Fornecedor");
+    System.out.println("Nome: " + this.nome);
+    System.out.println("Id: " + this.id);
+    System.out.println("CNPJ: " + this.cnpj);
+    System.out.println("Endereço" + this.endereco);
+    System.out.println("Telefone" + this.telefone);
+    System.out.println("Email" + this.email);
+    System.out.println("--------------------");
+
   }
 }
