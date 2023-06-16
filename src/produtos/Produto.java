@@ -1,12 +1,12 @@
 package produtos; 
 
 public abstract class Produto{
-  public String nome; 
-  public double preco;
-  public String descricao;
-  public String fabricante; 
-  public String dataDeFabricacao; 
-  public String dataDeValidade; 
+  protected String nome; 
+  protected double preco;
+  protected String descricao;
+  protected String fabricante; 
+  protected String dataDeFabricacao; 
+  protected String dataDeValidade; 
 
   public String getNome(){
     return nome; 
