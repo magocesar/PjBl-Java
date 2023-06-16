@@ -8,6 +8,14 @@ public class produtoProduzido extends Produto{
 
   @Override
   public void exibirPrateleira(){
-    System.out.println("Nome: " + this.nome + "\nPreço: " + this.preco + "\nDescrição: " + this.descricao + "\nFabricante: " + this.fabricante + "\nData de Fabricação: " + this.dataDeFabricacao + "\nData de Validade: " + this.dataDeValidade + "\nFabricante: " + this.fabricante); 
+    System.out.println("--------------------");
+    System.out.println("Produtos Produzidos na Prateleira");
+    System.out.println("Nome: " + this.nome);
+    System.out.println("Preço: " + this.preco);
+    System.out.println("Descrição: " + this.descricao);
+    System.out.println("Fabricante: " + this.fabricante);
+    System.out.println("Data de Fabricação: " + this.dataDeFabricacao);
+    System.out.println("Data de Validade: " + this.dataDeValidade);
+    System.out.println("--------------------");
   }
 }
