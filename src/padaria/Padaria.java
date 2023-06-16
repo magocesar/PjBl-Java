@@ -160,6 +160,7 @@ public class Padaria {
             System.out.println("\n--------------------");
             System.out.println("Digite o tipo de funcionário que deseja adicionar: ");
             System.out.println("1 - Atendente");
+            System.out.println("2 - Padeiro");
             System.out.println("--------------------");
             System.out.println("Para voltar, digite '0'");
             System.out.println("--------------------");
@@ -179,6 +180,10 @@ public class Padaria {
             switch (opcao) {
                 case "1":
                     this.adicionarAtendente(scanner);
+                    break;
+
+                case "2":
+                    this.adicionarPadeiro(scanner);
                     break;
             
                 case "0":
@@ -393,6 +398,10 @@ public class Padaria {
         this.funcionarios.add(new Atendente(nome, cpf, sexo, idade, salario, turno, 0));
         System.out.println("Atendente adicionado com sucesso!");
         return;
+    }
+
+    public void adicionarPadeiro(Scanner scanner){
+        
     }
 
     public void removerFuncionario(Scanner scanner) throws NoCpfInDatabaseException{
@@ -808,7 +817,6 @@ public class Padaria {
         }
     }
     
-
     public void exibirClientes(){
         System.out.println("Clientes: ");
         if(this.clientes.size() == 0){
@@ -821,10 +829,6 @@ public class Padaria {
         }
     }
 
-
-
-
-    
     public void exibirMenuEstoque(Scanner scanner){
         String opcao = null;
         boolean sair = false;
@@ -900,13 +904,13 @@ public class Padaria {
 
             switch(opcao){
                 case "1":
-                    adicionarProdutoIndustrializado();
+                    //adicionarProdutoIndustrializado();
                     break;
                 case "2":
-                    adicionarProdutoProduzido();
+                    //adicionarProdutoProduzido();
                     break;
                 case "3":
-                    adicionarIngrediente();
+                    //adicionarIngrediente();
                     break;
                 case "0":
                     System.out.println("Voltando ao menu principal...");
@@ -943,13 +947,13 @@ public class Padaria {
 
             switch(opcao){
                 case "1":
-                    removerProdutoIndustrializado();
+                    //removerProdutoIndustrializado();
                     break;
                 case "2":
-                    removerProdutoProduzido();
+                    //removerProdutoProduzido();
                     break;
                 case "3":
-                    removerIngrediente();
+                    //removerIngrediente();
                     break;
                 case "0":
                     System.out.println("Voltando ao menu principal...");
@@ -987,13 +991,13 @@ public class Padaria {
 
             switch(opcao){
                 case "1":
-                    exibirProdutosIndustrializados();
+                    //exibirProdutosIndustrializados();
                     break;
                 case "2":
-                    exibirProdutosProduzidos();
+                    //exibirProdutosProduzidos();
                     break;
                 case "3":
-                    exibirIngredientes();
+                    //exibirIngredientes();
                     break;
                 case "0":
                     System.out.println("Voltando ao menu principal...");
