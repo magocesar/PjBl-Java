@@ -21,6 +21,11 @@ public class Atendente extends Funcionario{
     }
 
     @Override
+    public String getFuncao(){
+        return "Atendente";
+    }
+
+    @Override
     public void exibirDados(){
         System.out.println("--------------------");
         System.out.println("Nome: " + this.nome);
