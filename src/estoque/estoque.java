@@ -378,7 +378,7 @@ public class estoque {
 
         this.produtoProduzido.add(new produtoProduzido(this.id, nome, preco, descricao, fabricante, dataDeFabricacao, dataDeValidade));
         this.id++;
-        System.out.println("Produto Industrializado adicionado com sucesso!");
+        System.out.println("Produto Produzido adicionado com sucesso!");
     }
 
     public void adicionarIngrediente(Scanner scanner){
@@ -390,7 +390,7 @@ public class estoque {
         String dataDeValidade = null;
 
         System.out.println("\n--------------------");
-        System.out.println("Adicionar Produto Produzido");
+        System.out.println("Adicionar Ingredientes");
         System.out.println("Caso deseja cancelar, digite '0' em qualquer campo.");
         System.out.println("--------------------");
 
@@ -562,7 +562,7 @@ public class estoque {
 
         this.ingredientes.add(new ingrediente(this.id, nome, preco, descricao, fabricante, dataDeFabricacao, dataDeValidade));
         this.id++;
-        System.out.println("Produto Industrializado adicionado com sucesso!");
+        System.out.println("Ingrediente adicionado com sucesso!");
     }
 
     public void removerProdutoIndustrializado(Scanner scanner) throws NoIdInDatabaseException{
