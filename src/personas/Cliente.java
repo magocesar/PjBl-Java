@@ -36,7 +36,7 @@ public class Cliente extends Pessoa{
     }
 
     @Override
-    public void exibirDados() {
+    public void exibirDados(){
         System.out.println("--------------------");
         System.out.println("Dados do cliente: ");
         System.out.println("Nome: " + this.nome);
@@ -48,5 +48,6 @@ public class Cliente extends Pessoa{
         System.out.println("Número de compras: " + this.numero_de_compras);
         System.out.println("--------------------");
     }
+
     
 }

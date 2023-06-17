@@ -1,9 +1,9 @@
 package produtos;
 
-public class ingrediente extends produtoIndustrializado{
+public class ingrediente extends Produto{
 
-    public ingrediente(int id, String nome, double preco, String descricao, String fabricante, String dataDeFabricacao,String dataDeValidade){
-        super(id, nome, preco, descricao, fabricante, dataDeFabricacao, dataDeValidade);
+    public ingrediente(int id, String nome, double preco, int quantidade, String descricao, String fabricante, String dataDeFabricacao,String dataDeValidade){
+        super(id, nome, preco, quantidade, descricao, fabricante, dataDeFabricacao, dataDeValidade);
         
     }
 
@@ -14,6 +14,7 @@ public class ingrediente extends produtoIndustrializado{
         System.out.println("Id: " + this.id);
         System.out.println("Nome: " + this.nome);
         System.out.println("Preço: " + this.preco);
+        System.out.println("Quantidade: " + this.quantidade);
         System.out.println("Descrição: " + this.descricao);
         System.out.println("Fabricante: " + this.fabricante);
         System.out.println("Data de Fabricação: " + this.dataDeFabricacao);
