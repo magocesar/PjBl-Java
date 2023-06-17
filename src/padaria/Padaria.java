@@ -1,13 +1,17 @@
 package padaria;
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import estoque.estoque;
 import personas.*;
 import excep.*;
-import estoque.*;
+//import estoque.*;
 
 public class Padaria {
+    private estoque estoque = new estoque();
     private String nome;
     private String cnpj;
+    private estoque estoque = new estoque();
     private ArrayList<Funcionario> funcionarios = new ArrayList<Funcionario>();
     private ArrayList<Cliente> clientes = new ArrayList<Cliente>();
     
@@ -1102,13 +1106,13 @@ public class Padaria {
 
             switch(opcao){
                 case "1":
-                    //adicionarProdutoIndustrializado();
+                    estoque.adicionarProdutoIndustrializado(scanner);
                     break;
                 case "2":
-                    //adicionarProdutoProduzido();
+                   estoque.adicionarProdutoProduzido(scanner);
                     break;
                 case "3":
-                    //adicionarIngrediente();
+                    estoque.adicionarIngrediente(scanner);
                     break;
                 case "0":
                     System.out.println("Voltando ao menu principal...");
@@ -1144,13 +1148,28 @@ public class Padaria {
 
             switch(opcao){
                 case "1":
-                    //removerProdutoIndustrializado();
+                    try{
+                        estoque.removerProdutoIndustrializado(scanner);
+                    }catch(NoIdInDatabaseException e){
+                        System.out.println(e.getMessage());
+                    }
+                    
                     break;
                 case "2":
-                    //removerProdutoProduzido();
+                    try{
+                        estoque.removerProdutoProduzido(scanner);
+                    }catch(NoIdInDatabaseException e){
+                        System.out.println(e.getMessage());
+                    }
+                    
                     break;
                 case "3":
-                    //removerIngrediente();
+                    try{
+                        estoque.removerIngrediente(scanner);
+                    }catch(NoIdInDatabaseException e){
+                        System.out.println(e.getMessage());
+                    }
+                    
                     break;
                 case "0":
                     System.out.println("Voltando ao menu principal...");
@@ -1188,13 +1207,13 @@ public class Padaria {
 
             switch(opcao){
                 case "1":
-                    //exibirProdutosIndustrializados();
+                    estoque.exibirProdutosIndustrializados();
                     break;
                 case "2":
-                    //exibirProdutosProduzidos();
+                    estoque.exibirProdutosProduzidos();
                     break;
                 case "3":
-                    //exibirIngredientes();
+                    estoque.exibirIngredientes();
                     break;
                 case "0":
                     System.out.println("Voltando ao menu principal...");

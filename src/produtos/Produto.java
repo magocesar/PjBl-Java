@@ -1,12 +1,21 @@
 package produtos; 
 
 public abstract class Produto{
+  protected int id;
   protected String nome; 
   protected double preco;
   protected String descricao;
   protected String fabricante; 
   protected String dataDeFabricacao; 
   protected String dataDeValidade; 
+
+  public int getId() {
+    return id;
+  }
+
+public void setId(int id) {
+    this.id = id;
+  }
 
   public String getNome(){
     return nome; 
@@ -56,7 +65,8 @@ public abstract class Produto{
     this.dataDeValidade = dataDeValidade; 
   }
 
-  public Produto(String nome, double preco, String descricao, String fabricante, String dataDeFabricacao, String dataDeValidade){
+  public Produto(int id, String nome, double preco, String descricao, String fabricante, String dataDeFabricacao, String dataDeValidade){
+    this.id = id;
     this.nome = nome; 
     this.preco = preco; 
     this.descricao = descricao; 

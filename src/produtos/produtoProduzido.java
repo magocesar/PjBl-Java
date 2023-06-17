@@ -2,14 +2,15 @@ package produtos;
 
 public class produtoProduzido extends Produto{
   
-  public produtoProduzido(String nome, double preco, String descricao, String fabricante, String dataDeFabricacao, String dataDeValidade){
-    super(nome, preco, descricao, fabricante, dataDeFabricacao, dataDeValidade);
+  public produtoProduzido(int id, String nome, double preco, String descricao, String fabricante, String dataDeFabricacao, String dataDeValidade){
+    super(id, nome, preco, descricao, fabricante, dataDeFabricacao, dataDeValidade);
   }
 
   @Override
   public void exibirPrateleira(){
     System.out.println("--------------------");
     System.out.println("Produtos Produzidos na Prateleira");
+    System.out.println("Id: " + this.id);
     System.out.println("Nome: " + this.nome);
     System.out.println("Preço: " + this.preco);
     System.out.println("Descrição: " + this.descricao);
