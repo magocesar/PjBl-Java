@@ -11,6 +11,7 @@ public class Padaria {
     private estoque estoque = new estoque();
     private String nome;
     private String cnpj;
+    private estoque estoque = new estoque();
     private ArrayList<Funcionario> funcionarios = new ArrayList<Funcionario>();
     private ArrayList<Cliente> clientes = new ArrayList<Cliente>();
     
