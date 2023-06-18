@@ -1090,8 +1090,10 @@ public class Padaria {
             System.out.println("\n--------------------");
             System.out.println("1 - Adicionar produto industrializado");
             System.out.println("2 - Adicionar produto produzido");
-            System.out.println("0 - Voltar");
-            System.out.println("\n--------------------");
+            System.out.println("--------------------");
+            System.out.println("Para voltar ao menu principal, digite '0'");
+            System.out.println("--------------------");
+
             
             boolean opcao_valida = false;
 
@@ -1131,7 +1133,10 @@ public class Padaria {
             System.out.println("\n--------------------");
             System.out.println("1 - Remover produto industrializado");
             System.out.println("2 - Remover produto produzido");
-            System.out.println("0 - Voltar");
+            System.out.println("--------------------");
+            System.out.println("Para voltar ao menu principal, digite '0'");
+            System.out.println("--------------------");
+
             boolean opcao_valida = false;
 
             while(!opcao_valida){
@@ -1180,8 +1185,10 @@ public class Padaria {
             System.out.println("\n--------------------");
             System.out.println("1 - Exibir produtos industrializados");
             System.out.println("2 - Exibir produtos produzidos");
-            System.out.println("0 - Voltar");
-            System.out.println("\n--------------------");
+            System.out.println("--------------------");
+            System.out.println("Para voltar ao menu principal, digite '0'");
+            System.out.println("--------------------");
+
             boolean opcao_valida = false;
 
             while(!opcao_valida){
