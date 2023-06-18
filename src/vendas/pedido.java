@@ -9,7 +9,6 @@ import produtos.Produto;
 public class pedido {
   private Atendente atendente; 
   private Cliente cliente; 
-  private String data;
 
   private ArrayList<Produto> produtos = new ArrayList<Produto>(); 
 
@@ -29,14 +28,6 @@ public class pedido {
     this.cliente = cliente; 
   }
 
-  public String getData() {
-    return data;
-  }
-
-  public void setData(String data) {
-    this.data = data;
-  }
-
   public ArrayList<Produto> getProdutos() {
     return produtos;
   }
@@ -45,10 +36,9 @@ public class pedido {
     this.produtos = produtos;
   }
   
-  public pedido(Atendente atendente, Cliente cliente, String data, ArrayList<Produto> produtos){
+  public pedido(Atendente atendente, Cliente cliente, ArrayList<Produto> produtos){
     this.atendente = atendente; 
     this.cliente = cliente; 
-    this.data = data; 
     this.produtos = produtos; 
   }
 
@@ -57,7 +47,6 @@ public class pedido {
     System.out.println("Pedido");
     System.out.println("Atendente: " + this.atendente.getNome());
     System.out.println("Cliente: " + this.cliente.getNome());
-    System.out.println("Data: " + this.data);
     System.out.println("Produtos: ");
     for(Produto produto : this.produtos){
       System.out.println("Nome: " + produto.getNome());
@@ -68,6 +57,7 @@ public class pedido {
       System.out.println("Data de Validade: " + produto.getDataDeValidade());
       System.out.println("--------------------");
     }
+    System.out.println("Valor Total: " + this.calcularValor());
   }
 
   public double calcularValor(){

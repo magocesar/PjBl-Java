@@ -13,7 +13,7 @@ public class Padaria {
     private ArrayList<Funcionario> funcionarios = new ArrayList<Funcionario>();
     private ArrayList<Cliente> clientes = new ArrayList<Cliente>();
     private estoque estoque = new estoque();
-    private ArrayList<venda> vendas = new ArrayList<venda>();
+    private ArrayList<pedido> vendas = new ArrayList<pedido>();
 
     public String getNome() {
         return nome;
@@ -33,7 +33,7 @@ public class Padaria {
         this.cnpj = cnpj;
     }
 
-    public Padaria(String nome, String cnpj, ArrayList<Funcionario> funcionarios, ArrayList<Cliente> clientes, estoque estoque, ArrayList<venda> vendas) {
+    public Padaria(String nome, String cnpj, ArrayList<Funcionario> funcionarios, ArrayList<Cliente> clientes, estoque estoque, ArrayList<pedido> vendas) {
         this.nome = nome;
         this.cnpj = cnpj;
         this.funcionarios = funcionarios;

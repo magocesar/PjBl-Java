@@ -4,6 +4,7 @@ import java.util.Scanner;
 import excep.NoIdInDatabaseException;
 import produtos.*;
 import personas.*;
+import vendas.*;
 
 public class estoque {
     private int id = 1;
@@ -615,6 +616,137 @@ public class estoque {
     }
 
     public void novaVenda(Scanner scanner, Atendente atendente, Cliente cliente){
-        
+        ArrayList<Produto> produtos = new ArrayList<Produto>();
+        ArrayList<String> ops = new ArrayList<String>(){
+            {
+                add("S");
+                add("N");
+            }
+        };
+
+        boolean sair = false;
+        String op = null;
+        while(!sair){
+            boolean opValida = false;
+            while(!opValida){
+                
+                //Exibir produtos
+                System.out.println("Produtos industrializados: ");
+                if(this.produtoIndustrializado.size() == 0){
+                    System.out.println("Não há produtoIndustrializado cadastrados!");
+                }else{
+                    for(int i = 0; i < this.produtoIndustrializado.size(); i++){
+                        System.out.println("Produto Industrializado " + (i+1) + ": ");
+                        this.produtoIndustrializado.get(i).exibirPrateleira();
+                    }
+                }
+
+                System.out.println("Produtos Produzidos: ");
+                if(this.produtoProduzido.size() == 0){
+                    System.out.println("Não há Produtos Produzidos cadastrados!");
+                }else{
+                    for(int i = 0; i < this.produtoProduzido.size(); i++){
+                        System.out.println("Cliente " + (i+1) + ": ");
+                        this.produtoProduzido.get(i).exibirPrateleira();
+                    }
+                }
+
+                try{
+                    System.out.print("Deseja adicionar um produto? (S / N): ");
+                    op = scanner.nextLine();
+                }catch(Exception e){
+                    System.out.println("Opção inválida!");
+                }
+
+                if(!ops.contains(op)){
+                    System.out.println("Opção inválida, digite 'S' ou 'N'!");
+                }else{
+                    opValida = true;
+                }
+            }
+
+            if(op.equals("N")){
+                sair = true;
+            }else{
+                boolean idValido = false;
+                int id = 0;
+                while(!idValido){
+                    try{
+                        System.out.print("Digite o id do produto: ");
+                        id = scanner.nextInt();
+                        scanner.nextLine();
+                    }catch(Exception e){
+                        System.out.println("Id inválido!");
+                    }
+
+                    if(id < 0){
+                        System.out.println("Id inválido!");
+                    }else{
+                        idValido = true;
+                    }
+                }
+
+                boolean idEncontrado = false;
+                for(int i = 0; i < this.produtoIndustrializado.size(); i++){
+                    if(this.produtoIndustrializado.get(i).getId() == id){
+                        produtos.add(this.produtoIndustrializado.get(i));
+                        idEncontrado = true;
+                        break;
+                    }
+                }
+
+                if(!idEncontrado){
+                    for(int i = 0; i < this.produtoProduzido.size(); i++){
+                        if(this.produtoProduzido.get(i).getId() == id){
+                            produtos.add(this.produtoProduzido.get(i));
+                            idEncontrado = true;
+                            break;
+                        }
+                    }
+                }
+
+                if(!idEncontrado){
+                    System.out.println("Id não encontrado!");
+                }
+            }
+        }
+
+        this.confirmarPedido(scanner, atendente, cliente, produtos);
     }    
+
+    public pedido confirmarPedido(Scanner scanner, Atendente atendente, Cliente cliente, ArrayList<Produto> produtos){
+        boolean opValida = false;
+        String op = null;
+        ArrayList<String> ops = new ArrayList<String>(){
+            {
+                add("S");
+                add("N");
+            }
+        };
+        while(!opValida){
+            try{
+                System.out.print("Deseja confirmar a venda? (S / N): ");
+                op = scanner.nextLine();
+            }catch(Exception e){
+                System.out.println("Opção inválida!");
+            }
+
+            if(!ops.contains(op)){
+                System.out.println("Opção inválida, digite 'S' ou 'N'!");
+            }else{
+                opValida = true;
+            }
+        }
+
+        if(op.equals("N")){
+            System.out.println("Cancelando...");
+            return null;
+        }
+
+        pedido pedido = new pedido(atendente, cliente, produtos);
+
+        return pedido;
+    }
 }
+
+
