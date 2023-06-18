@@ -17,6 +17,7 @@ public class Padaria {
     private ArrayList<Cliente> clientes = new ArrayList<Cliente>();
     private estoque estoque = new estoque();
     private ArrayList<pedido> vendas = new ArrayList<pedido>();
+    private relatoriosVendas relatoriosVendas = new relatoriosVendas();
 
     public String getNome() {
         return nome;
