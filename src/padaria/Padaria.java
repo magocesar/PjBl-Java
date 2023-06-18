@@ -1299,7 +1299,18 @@ public class Padaria {
                 case "1":
                     this.prepararVenda(scanner);
                 case "2":
-                    continue;
+                    if(vendas.isEmpty()){
+                        System.out.println("\n--------------------");
+                        System.out.println("Não há vendas cadastradas!");
+                        System.out.println("--------------------");
+                        break;
+                    }
+                    System.out.println("\n--------------------");
+                    System.out.println("Vendas cadastradas: ");
+                    for(pedido venda : vendas){
+                        venda.exibirPedido();
+                    }
+                    break;
                 case "0":
                     System.out.println("Voltando ao menu principal...");
                     return;
@@ -1433,10 +1444,37 @@ public class Padaria {
                     System.out.println("Opção inválida!");
                 }
             }
+
             if(op.equals("S")){
                 pedido pedido = estoque.novaVenda(scanner, atendente, cliente);
+
                 if(pedido != null){
+
                     vendas.add(pedido);
+                    Cliente cliente_pedido = pedido.getCliente();
+                    Atendente atendente_pedido = pedido.getAtendente();
+
+                    if(!cliente_pedido.getNome().equals("Não Cadastrado")){
+                        cliente_pedido.adicionarNovaCompra();
+                        String cpf_cliente = cliente_pedido.getCpf();
+
+                        for(Cliente c : clientes){
+                            if(c.getCpf().equals(cpf_cliente)){
+                                c = cliente_pedido;
+                                break;
+                            }
+                        }
+                    }
+
+                    atendente_pedido.adicionarNovaVenda();
+                    String cpf_atendente = atendente_pedido.getCpf();
+                    for(Funcionario a : funcionarios){
+                        if(a.getCpf().equals(cpf_atendente)){
+                            a = atendente_pedido;
+                            break;
+                        }
+                    }
+
                     System.out.println("Venda realizada com sucesso!");
                 }else{
                     System.out.println("Venda não realizada!");

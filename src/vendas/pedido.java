@@ -55,6 +55,7 @@ public class pedido {
       System.out.println("Fabricante: " + produto.getFabricante());
       System.out.println("Data de Fabricação: " + produto.getDataDeFabricacao());
       System.out.println("Data de Validade: " + produto.getDataDeValidade());
+      System.out.println("Quantidade: " + produto.getQuantidade());
       System.out.println("--------------------");
     }
     System.out.println("Valor Total: " + this.calcularValor());

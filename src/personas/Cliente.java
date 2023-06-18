@@ -3,7 +3,7 @@ package personas;
 public class Cliente extends Pessoa{
     private String endereco;
     private String telefone;
-    private int numero_de_compras;
+    private int numero_de_compras = 0;
 
     public String getEndereco() {
         return endereco;

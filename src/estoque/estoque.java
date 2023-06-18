@@ -1,5 +1,4 @@
 package estoque;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Scanner;
 import excep.NoIdInDatabaseException;
@@ -703,10 +702,16 @@ public class estoque {
 
                 try{
                     System.out.println("--------------------");
+                    System.out.println("Para cancelar, digite '0'");
                     System.out.print("Deseja adicionar um produto? (S / N): ");
                     op = scanner.nextLine();
                 }catch(Exception e){
                     System.out.println("Opção inválida!");
+                }
+
+                if(op.equals("0")){
+                    System.out.println("Cancelando...");
+                    return null;
                 }
 
                 if(!ops.contains(op)){
