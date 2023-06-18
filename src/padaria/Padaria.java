@@ -1,4 +1,7 @@
 package padaria;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -40,6 +43,56 @@ public class Padaria {
         this.clientes = clientes;
         this.estoque = estoque;
         this.vendas = vendas;
+    }
+
+        public void salvarDadosEmArquivo(String nomeArquivo) {
+        try {
+            FileWriter fileWriter = new FileWriter(nomeArquivo);
+            BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+
+            // Escrever os dados da padaria no arquivo
+            bufferedWriter.write("Nome: " + nome);
+            bufferedWriter.newLine();
+            bufferedWriter.write("CNPJ: " + cnpj);
+            bufferedWriter.newLine();
+
+            // Escrever os funcionários
+            bufferedWriter.write("Funcionários:");
+            bufferedWriter.newLine();
+            for (Funcionario funcionario : funcionarios) {
+                bufferedWriter.write(funcionario.toString());
+                bufferedWriter.newLine();
+            }
+
+            // Escrever os clientes
+            bufferedWriter.write("Clientes:");
+            bufferedWriter.newLine();
+            for (Cliente cliente : clientes) {
+                bufferedWriter.write(cliente.toString());
+                bufferedWriter.newLine();
+            }
+
+            // Escrever o estoque
+            bufferedWriter.write("Estoque:");
+            bufferedWriter.newLine();
+            bufferedWriter.write(estoque.toString());
+            bufferedWriter.newLine();
+
+            // Escrever as vendas
+            bufferedWriter.write("Vendas:");
+            bufferedWriter.newLine();
+            for (pedido venda : vendas) {
+                bufferedWriter.write(venda.toString());
+                bufferedWriter.newLine();
+            }
+
+            bufferedWriter.close();
+            fileWriter.close();
+
+            System.out.println("Dados salvos com sucesso no arquivo " + nomeArquivo);
+        } catch (IOException e) {
+            System.out.println("Erro ao salvar os dados no arquivo: " + e.getMessage());
+        }
     }
 
     public boolean procurarCpf(String cpf){
