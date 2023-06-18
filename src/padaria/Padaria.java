@@ -1089,8 +1089,8 @@ public class Padaria {
         while(!sair){
             System.out.println("\n--------------------");
             System.out.println("1 - Adicionar produto industrializado");
-            //System.out.println("2 - Adicionar produto produzido");
-            System.out.println("2 - Adicionar ingrediente");
+            System.out.println("2 - Adicionar produto produzido");
+            System.out.println("3 - Adicionar ingrediente");
             System.out.println("--------------------");
             System.out.println("Para voltar ao menu anterior, digite '0'");
             System.out.println("--------------------");
@@ -1111,10 +1111,10 @@ public class Padaria {
                 case "1":
                     estoque.adicionarProdutoIndustrializado(scanner);
                     break;
-                //case "2":
-                //   estoque.adicionarProdutoProduzido(scanner);
-                //    break;
                 case "2":
+                    estoque.adicionarProdutoProduzido(scanner);
+                    break;
+                case "3":
                     estoque.adicionarIngrediente(scanner);
                     break;
                 case "0":

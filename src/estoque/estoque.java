@@ -6,12 +6,12 @@ import produtos.*;
 import personas.*;
 
 public class estoque {
-    private int id = 1;
-    private ArrayList<produtoIndustrializado> produtoIndustrializados = new ArrayList<produtoIndustrializado>();
+    protected int id = 1;
+    protected ArrayList<produtoIndustrializado> produtoIndustrializados = new ArrayList<produtoIndustrializado>();
 
-    private ArrayList<produtoProduzido> produtoProduzido = new ArrayList<produtoProduzido>();
+    protected ArrayList<produtoProduzido> produtoProduzido = new ArrayList<produtoProduzido>();
 
-    private ArrayList<ingrediente> ingredientes = new ArrayList<ingrediente>();
+    protected ArrayList<ingrediente> ingredientes = new ArrayList<ingrediente>();
 
 
     public void adicionarProdutoIndustrializado(Scanner scanner){
@@ -898,7 +898,5 @@ public class estoque {
 
     public void novaVenda(Scanner scanner, Atendente atendente, Cliente cliente){
         
-    }
-    
-    
+    }    
 }
