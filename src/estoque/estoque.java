@@ -3,15 +3,13 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import excep.NoIdInDatabaseException;
 import produtos.*;
+import personas.*;
 
 public class estoque {
     protected int id = 1;
     protected ArrayList<produtoIndustrializado> produtoIndustrializados = new ArrayList<produtoIndustrializado>();
 
     protected ArrayList<produtoProduzido> produtoProduzido = new ArrayList<produtoProduzido>();
-
-    protected ArrayList<ingrediente> ingredientes = new ArrayList<ingrediente>();
-
 
     public void adicionarProdutoIndustrializado(Scanner scanner){
         String nome = null; 
@@ -601,18 +599,6 @@ public class estoque {
             for(int i = 0; i < this.produtoProduzido.size(); i++){
                 System.out.println("Cliente " + (i+1) + ": ");
                 this.produtoProduzido.get(i).exibirPrateleira();
-            }
-        }
-    }
-
-    public void exibirIngredientes(){
-        System.out.println("Ingredientes: ");
-        if(this.ingredientes.size() == 0){
-            System.out.println("Não há Ingredientes cadastrados!");
-        }else{
-            for(int i = 0; i < this.ingredientes.size(); i++){
-                System.out.println("Cliente " + (i+1) + ": ");
-                this.ingredientes.get(i).exibirPrateleira();
             }
         }
     }
