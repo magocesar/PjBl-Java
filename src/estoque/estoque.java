@@ -71,6 +71,7 @@ public class estoque {
         while(!descricaoValida){
             try{
                 System.out.print("Digite a descrição do produto: ");
+                scanner.nextLine();
                 descricao = scanner.nextLine();
             }catch(Exception e){
                 System.out.println("Descrição inválida!");
@@ -197,6 +198,7 @@ public class estoque {
         while(!opcaoValida){
             try{
                 System.out.print("Confirmar? (S / N): ");
+                scanner.nextLine();
                 op = scanner.nextLine();
             }catch(Exception e){
                 System.out.println("Opção inválida!");
@@ -279,6 +281,7 @@ public class estoque {
         while(!descricaoValida){
             try{
                 System.out.print("Digite a descrição do produto: ");
+                scanner.nextLine();
                 descricao = scanner.nextLine();
             }catch(Exception e){
                 System.out.println("Descrição inválida!");
@@ -405,6 +408,7 @@ public class estoque {
         while(!opcaoValida){
             try{
                 System.out.print("Confirmar? (S / N): ");
+                scanner.nextLine();
                 op = scanner.nextLine();
             }catch(Exception e){
                 System.out.println("Opção inválida!");
@@ -424,7 +428,7 @@ public class estoque {
 
         this.produtoProduzido.add(new produtoProduzido(this.id, nome, preco, descricao, fabricante, dataDeFabricacao, dataDeValidade, quantidade));
         this.id++;
-        System.out.println("Ingrediente adicionado com sucesso!");
+        System.out.println("Produto Produzido adicionado com sucesso!");
     }
 
     public void removerProdutoIndustrializado(Scanner scanner) throws NoIdInDatabaseException{

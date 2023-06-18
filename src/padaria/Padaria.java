@@ -863,6 +863,7 @@ public class Padaria {
         while(!enderecoValido){
             try{
                 System.out.print("Digite o endereço do cliente: ");
+                scanner.nextLine();
                 endereco = scanner.nextLine();
             }catch(Exception e){
                 System.out.println("Endereço inválido!");
@@ -1091,7 +1092,7 @@ public class Padaria {
             System.out.println("1 - Adicionar produto industrializado");
             System.out.println("2 - Adicionar produto produzido");
             System.out.println("--------------------");
-            System.out.println("Para voltar ao menu principal, digite '0'");
+            System.out.println("Para voltar, digite '0'");
             System.out.println("--------------------");
 
             
@@ -1134,7 +1135,7 @@ public class Padaria {
             System.out.println("1 - Remover produto industrializado");
             System.out.println("2 - Remover produto produzido");
             System.out.println("--------------------");
-            System.out.println("Para voltar ao menu principal, digite '0'");
+            System.out.println("Para voltar, digite '0'");
             System.out.println("--------------------");
 
             boolean opcao_valida = false;
@@ -1186,7 +1187,7 @@ public class Padaria {
             System.out.println("1 - Exibir produtos industrializados");
             System.out.println("2 - Exibir produtos produzidos");
             System.out.println("--------------------");
-            System.out.println("Para voltar ao menu principal, digite '0'");
+            System.out.println("Para voltar, digite '0'");
             System.out.println("--------------------");
 
             boolean opcao_valida = false;
