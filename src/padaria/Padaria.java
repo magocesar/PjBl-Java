@@ -166,7 +166,6 @@ public class Padaria {
             System.out.println("\n--------------------");
             System.out.println("Digite o tipo de funcionário que deseja adicionar: ");
             System.out.println("1 - Atendente");
-            System.out.println("2 - Padeiro");
             System.out.println("--------------------");
             System.out.println("Para voltar, digite '0'");
             System.out.println("--------------------");
@@ -187,11 +186,6 @@ public class Padaria {
                 case "1":
                     this.adicionarAtendente(scanner);
                     break;
-
-                case "2":
-                    this.adicionarPadeiro(scanner);
-                    break;
-            
                 case "0":
                     System.out.println("Voltando ao menu anterior...");
                     return;
@@ -1113,7 +1107,7 @@ public class Padaria {
                     estoque.adicionarProdutoIndustrializado(scanner);
                     break;
                 case "2":
-                   estoque.adicionarProdutoProduzido(scanner);
+                    estoque.adicionarProdutoProduzido(scanner);
                     break;
                 case "0":
                     System.out.println("Voltando ao menu principal...");
