@@ -2,18 +2,17 @@ package padaria;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import estoque.estoque;
 import personas.*;
 import excep.*;
-//import estoque.*;
+import estoque.*;
 
 public class Padaria {
     private String nome;
     private String cnpj;
-    private estoque estoque = new estoque();
     private ArrayList<Funcionario> funcionarios = new ArrayList<Funcionario>();
     private ArrayList<Cliente> clientes = new ArrayList<Cliente>();
-    
+    private estoque estoque = new estoque();
+
     public String getNome() {
         return nome;
     }
@@ -63,6 +62,7 @@ public class Padaria {
             System.out.println("1 - Gerenciar Funcionários");
             System.out.println("2 - Gerenciar Clientes");
             System.out.println("3 - Gerenciar Estoque");
+            System.out.println("4 - Menu de Vendas");
             System.out.println("--------------------");
             System.out.println("Para sair do programa, digite '0'");
             System.out.println("--------------------");
@@ -88,6 +88,9 @@ public class Padaria {
                     break;
                 case "3":
                     exibirMenuEstoque(scanner);
+                    break;
+                case "4":
+                    exibirMenuVendas(scanner);
                     break;
                 case "0":
                     System.out.println("Saindo do programa...");
@@ -1125,6 +1128,7 @@ public class Padaria {
         boolean sair = false;
 
         while(!sair){
+            System.out.println("\n--------------------");
             System.out.println("1 - Remover produto industrializado");
             System.out.println("2 - Remover produto produzido");
             System.out.println("0 - Voltar");
@@ -1206,5 +1210,204 @@ public class Padaria {
                     break;
             }
         }
+    }
+
+    public void exibirMenuVendas(Scanner scanner){
+        String opcao = null;
+        boolean sair = false;
+
+        while(!sair){
+            System.out.println("\n--------------------");
+            System.out.println("1 - Adicionar venda");
+            System.out.println("2 - Exibir vendas");
+            System.out.println("--------------------");
+            System.out.println("Para voltar ao menu principal, digite '0'");
+            System.out.println("--------------------");
+
+            boolean opcao_valida = false;
+
+            while(!opcao_valida){
+                try{
+                    System.out.print("Digite a opção desejada: ");
+                    opcao = scanner.nextLine();
+                    opcao_valida = true;
+                }catch(Exception e){
+                    System.out.println("Opção inválida!");
+                }
+            }
+
+            switch(opcao){
+                case "1":
+                    this.prepararVenda(scanner);
+                case "2":
+                    continue;
+                case "0":
+                    System.out.println("Voltando ao menu principal...");
+                    return;
+                default:
+                    System.out.println("Opção inválida!");
+                    break;
+            }
+        }
+    }
+
+    public void prepararVenda(Scanner scanner){
+        boolean sair = false;
+        Atendente atendente = null;
+        Cliente cliente = null;
+        boolean cliente_nao_existe = true;
+        while(!sair){
+            try{
+                System.out.println("\n--------------------");
+                System.out.println("Para voltar ao menu anterior, digite '0'");
+                System.out.println("--------------------");
+                System.out.print("Digite o CPF do Atendente: ");
+                String cpf = scanner.nextLine();
+                
+                if(cpf.equals("0")){
+                    System.out.println("--------------------");
+                    System.out.println("Voltando ao menu anterior...");
+                    return;
+                }
+
+                if(!existeFuncionario(cpf)){
+                    System.out.println("Funcionário não encontrado!");
+                    continue;
+                }
+
+                if(!(buscarFuncionario(cpf) instanceof Atendente)){
+                    System.out.println("Funcionário não é um atendente!");
+                    continue;
+                }
+
+                atendente = (Atendente) buscarFuncionario(cpf);
+
+                System.out.println("--------------------");
+                System.out.println("Atendente encontrado: " + atendente.getNome());
+                System.out.println("--------------------");
+            
+                sair = true;
+            
+            }catch(Exception e){
+                System.out.println("Opção inválida!");
+            }
+        }
+
+        sair = false;
+
+        while(!sair){
+            try{
+                System.out.println("Para voltar ao menu anterior, digite '0'");
+                System.out.println("Caso o cliente não esteja cadastrado, digite '1'");
+                System.out.println("--------------------");
+                System.out.print("Digite o CPF do Cliente: ");
+                String cpf = scanner.nextLine();
+                
+                if(cpf.equals("0")){
+                    System.out.println("Voltando ao menu anterior...");
+                    return;
+                }
+
+                if(!cpf.equals("1") && cpf.length() != 11){
+                    System.out.println("--------------------");
+                    System.out.println("CPF inválido!\nDevem ser digitados 11 números!");
+                    continue;
+                }
+
+                if(existeCliente(cpf)){
+                    cliente_nao_existe = false;
+                }
+
+                if(cliente_nao_existe){
+                    cliente = new Cliente("Não Cadastrado", "Não Cadastrado", "Não Cadastrado", 0, "Não Cadastrado", "Não Cadastrado", 0);
+                }else{
+                    cliente = (Cliente) buscarCliente(cpf);
+                }
+
+                System.out.println("--------------------");
+                System.out.println("Cliente: " + cliente.getNome());
+
+                sair = true;
+            }catch(Exception e){
+                System.out.println("Opção inválida!");
+            }   
+        }
+
+        sair = false;
+
+        while(!sair){
+            System.out.println("--------------------");
+            System.out.println("Confirmar Dados: ");
+            System.out.println("Atendente: " + atendente.getNome());
+            System.out.println("Cliente: " + cliente.getNome());
+            String op = null;
+            boolean opcao_valida = false;
+            ArrayList<String> ops = new ArrayList<String>(){
+                {
+                    add("S");
+                    add("N");
+                }
+            };
+            while(!opcao_valida){
+                try{
+                    System.out.print("Confirmar? (S/N): ");
+                    op = scanner.nextLine();
+                    if(!ops.contains(op)){
+                        System.out.println("Opção inválida!");
+                        continue;
+                    }
+                    opcao_valida = true;
+                }catch(Exception e){
+                    System.out.println("Opção inválida!");
+                }
+            }
+            if(op.equals("S")){
+                estoque.novaVenda(scanner, atendente, cliente);
+                sair = true;
+            }else{	
+                System.out.println("Voltando ao menu anterior...");
+                return;
+            }
+        }
+    }
+
+    public boolean existeCliente(String cpf){
+
+        for(Cliente cliente : clientes){
+            if(cliente.getCpf().equals(cpf)){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public Cliente buscarCliente(String cpf){
+
+        for(Cliente cliente : clientes){
+            if(cliente.getCpf().equals(cpf)){
+                return cliente;
+            }
+        }
+        return null;
+    }
+
+    public boolean existeFuncionario(String cpf){
+
+        for(Funcionario funcionario : funcionarios){
+            if(funcionario.getCpf().equals(cpf)){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public Funcionario buscarFuncionario(String cpf){
+
+        for(Funcionario funcionario : funcionarios){
+            if(funcionario.getCpf().equals(cpf)){
+                return funcionario;
+            }
+        }
+        return null;
     }
 }

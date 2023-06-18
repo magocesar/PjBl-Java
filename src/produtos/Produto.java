@@ -78,6 +78,7 @@ public void setId(int id) {
     this.id = id;
     this.nome = nome; 
     this.preco = preco; 
+    this.quantidade = quantidade;
     this.descricao = descricao; 
     this.fabricante = fabricante;
     this.dataDeFabricacao = dataDeFabricacao; 

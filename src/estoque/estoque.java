@@ -3,6 +3,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import excep.NoIdInDatabaseException;
 import produtos.*;
+import personas.*;
 
 public class estoque {
     private int id = 1;
@@ -14,6 +15,7 @@ public class estoque {
     public void adicionarProdutoIndustrializado(Scanner scanner){
         String nome = null; 
         double preco = 0;
+        int quantidade = 0;
         String descricao = null;
         String fabricante = null; 
         String dataDeFabricacao = null; 
@@ -67,6 +69,28 @@ public class estoque {
             }
         }
 
+        boolean quantidadeValida = false;
+        while(!quantidadeValida){
+            try{
+                System.out.print("Digite a quantidade do produto: ");
+                quantidade = scanner.nextInt();
+            }catch(Exception e){
+                System.out.println("Quantidade inválida!");
+            }
+
+            if(quantidade == 0){
+                System.out.println("Cancelando...");
+                return;
+            }
+
+            if(quantidade < 0){
+                System.out.println("Quantidade inválida!");
+            }else{	
+                quantidadeValida = true;
+            }
+        }
+        
+
         boolean descricaoValida = false;
         while(!descricaoValida){
             try{
@@ -177,6 +201,7 @@ public class estoque {
         System.out.println("Id: " + id);
         System.out.println("Nome: " + nome);
         System.out.println("Preço: " + preco);
+        System.out.println("Quantidade: " + quantidade);
         System.out.println("Descrição: " + descricao);
         System.out.println("Fabricante: " + fabricante);
         System.out.println("Data de fabricação: " + dataDeFabricacao);
@@ -221,6 +246,7 @@ public class estoque {
     public void adicionarProdutoProduzido(Scanner scanner){
         String nome = null; 
         double preco = 0;
+        int quantidade = 0;
         String descricao = null;
         String fabricante = null; 
         String dataDeFabricacao = null; 
@@ -274,6 +300,27 @@ public class estoque {
             }
         }
 
+        boolean quantidadeValida = false;
+        while(!quantidadeValida){
+            try{
+                System.out.print("Digite a quantidade do produto: ");
+                quantidade = scanner.nextInt();
+            }catch(Exception e){
+                System.out.println("Quantidade inválida!");
+            }
+
+            if(quantidade == 0){
+                System.out.println("Cancelando...");
+                return;
+            }
+
+            if(quantidade < 0){
+                System.out.println("Quantidade inválida!");
+            }else{	
+                quantidadeValida = true;
+            }
+        }
+
         boolean descricaoValida = false;
         while(!descricaoValida){
             try{
@@ -384,6 +431,7 @@ public class estoque {
         System.out.println("Id: " + id);
         System.out.println("Nome: " + nome);
         System.out.println("Preço: " + preco);
+        System.out.println("Quantidade: " + quantidade);
         System.out.println("Descrição: " + descricao);
         System.out.println("Fabricante: " + fabricante);
         System.out.println("Data de Fabricação: " + dataDeFabricacao);
@@ -422,7 +470,7 @@ public class estoque {
 
         this.produtoProduzido.add(new produtoProduzido(this.id, nome, preco, descricao, fabricante, dataDeFabricacao, dataDeValidade, quantidade));
         this.id++;
-        System.out.println("Produto Industrializado adicionado com sucesso!");
+        System.out.println("Ingrediente adicionado com sucesso!");
     }
 
     public void removerProdutoIndustrializado(Scanner scanner) throws NoIdInDatabaseException{
