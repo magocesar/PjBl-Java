@@ -8,7 +8,6 @@ import excep.*;
 //import estoque.*;
 
 public class Padaria {
-    private estoque estoque = new estoque();
     private String nome;
     private String cnpj;
     private estoque estoque = new estoque();
@@ -1088,7 +1087,6 @@ public class Padaria {
             System.out.println("\n--------------------");
             System.out.println("1 - Adicionar produto industrializado");
             System.out.println("2 - Adicionar produto produzido");
-            System.out.println("3 - Adicionar ingrediente");
             System.out.println("0 - Voltar");
             System.out.println("\n--------------------");
             
@@ -1111,9 +1109,6 @@ public class Padaria {
                 case "2":
                    estoque.adicionarProdutoProduzido(scanner);
                     break;
-                case "3":
-                    estoque.adicionarIngrediente(scanner);
-                    break;
                 case "0":
                     System.out.println("Voltando ao menu principal...");
                     return;
@@ -1132,8 +1127,7 @@ public class Padaria {
         while(!sair){
             System.out.println("1 - Remover produto industrializado");
             System.out.println("2 - Remover produto produzido");
-            System.out.println("3 - Remover ingrediente");
-            System.out.println("4 - Voltar");
+            System.out.println("0 - Voltar");
             boolean opcao_valida = false;
 
             while(!opcao_valida){
@@ -1163,14 +1157,6 @@ public class Padaria {
                     }
                     
                     break;
-                case "3":
-                    try{
-                        estoque.removerIngrediente(scanner);
-                    }catch(NoIdInDatabaseException e){
-                        System.out.println(e.getMessage());
-                    }
-                    
-                    break;
                 case "0":
                     System.out.println("Voltando ao menu principal...");
                     return;
@@ -1190,7 +1176,6 @@ public class Padaria {
             System.out.println("\n--------------------");
             System.out.println("1 - Exibir produtos industrializados");
             System.out.println("2 - Exibir produtos produzidos");
-            System.out.println("3 - Exibir ingredientes");
             System.out.println("0 - Voltar");
             System.out.println("\n--------------------");
             boolean opcao_valida = false;
@@ -1211,9 +1196,6 @@ public class Padaria {
                     break;
                 case "2":
                     estoque.exibirProdutosProduzidos();
-                    break;
-                case "3":
-                    estoque.exibirIngredientes();
                     break;
                 case "0":
                     System.out.println("Voltando ao menu principal...");

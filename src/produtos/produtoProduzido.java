@@ -2,8 +2,8 @@ package produtos;
 
 public class produtoProduzido extends Produto{
   
-  public produtoProduzido(int id, String nome, double preco, String descricao, String fabricante, String dataDeFabricacao, String dataDeValidade){
-    super(id, nome, preco, descricao, fabricante, dataDeFabricacao, dataDeValidade);
+  public produtoProduzido(int id, String nome, double preco, String descricao, String fabricante, String dataDeFabricacao, String dataDeValidade, int quantidade){
+    super(id, nome, preco, descricao, fabricante, dataDeFabricacao, dataDeValidade, quantidade);
   }
 
   @Override
@@ -17,6 +17,7 @@ public class produtoProduzido extends Produto{
     System.out.println("Fabricante: " + this.fabricante);
     System.out.println("Data de Fabricação: " + this.dataDeFabricacao);
     System.out.println("Data de Validade: " + this.dataDeValidade);
+    System.out.println("Quantidade em estoque: " + this.quantidade);
     System.out.println("--------------------");
   }
 }
