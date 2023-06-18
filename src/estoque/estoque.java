@@ -3,7 +3,6 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import excep.NoIdInDatabaseException;
 import produtos.*;
-import personas.*;
 
 public class estoque {
     private int id = 1;
@@ -15,7 +14,6 @@ public class estoque {
     public void adicionarProdutoIndustrializado(Scanner scanner){
         String nome = null; 
         double preco = 0;
-        int quantidade = 0;
         String descricao = null;
         String fabricante = null; 
         String dataDeFabricacao = null; 
@@ -68,28 +66,6 @@ public class estoque {
                 precoValido = true;
             }
         }
-
-        boolean quantidadeValida = false;
-        while(!quantidadeValida){
-            try{
-                System.out.print("Digite a quantidade do produto: ");
-                quantidade = scanner.nextInt();
-            }catch(Exception e){
-                System.out.println("Quantidade inválida!");
-            }
-
-            if(quantidade == 0){
-                System.out.println("Cancelando...");
-                return;
-            }
-
-            if(quantidade < 0){
-                System.out.println("Quantidade inválida!");
-            }else{	
-                quantidadeValida = true;
-            }
-        }
-        
 
         boolean descricaoValida = false;
         while(!descricaoValida){
@@ -246,7 +222,6 @@ public class estoque {
     public void adicionarProdutoProduzido(Scanner scanner){
         String nome = null; 
         double preco = 0;
-        int quantidade = 0;
         String descricao = null;
         String fabricante = null; 
         String dataDeFabricacao = null; 
@@ -297,27 +272,6 @@ public class estoque {
                 System.out.println("Preço inválido!");
             }else{	
                 precoValido = true;
-            }
-        }
-
-        boolean quantidadeValida = false;
-        while(!quantidadeValida){
-            try{
-                System.out.print("Digite a quantidade do produto: ");
-                quantidade = scanner.nextInt();
-            }catch(Exception e){
-                System.out.println("Quantidade inválida!");
-            }
-
-            if(quantidade == 0){
-                System.out.println("Cancelando...");
-                return;
-            }
-
-            if(quantidade < 0){
-                System.out.println("Quantidade inválida!");
-            }else{	
-                quantidadeValida = true;
             }
         }
 

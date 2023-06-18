@@ -1,7 +1,5 @@
 package produtos;
 
-import java.util.ArrayList;
-
 public class produtoProduzido extends Produto{
 
   
