@@ -1,14 +1,10 @@
 package produtos;
 
-import java.util.ArrayList;
-
 public class produtoProduzido extends Produto{
 
-  private ArrayList<ingrediente> ingredientes = new ArrayList<ingrediente>();
   
-  public produtoProduzido(int id, String nome, double preco, int quantidade, String descricao, String fabricante, String dataDeFabricacao, String dataDeValidade, ArrayList<ingrediente> ingredientes){
-    super(id, nome, preco, quantidade, descricao, fabricante, dataDeFabricacao, dataDeValidade);
-    this.ingredientes = ingredientes;
+  public produtoProduzido(int id, String nome, double preco, String descricao, String fabricante, String dataDeFabricacao, String dataDeValidade, int quantidade){
+    super(id, nome, preco, descricao, fabricante, dataDeFabricacao, dataDeValidade, quantidade);
   }
 
   @Override
@@ -23,6 +19,7 @@ public class produtoProduzido extends Produto{
     System.out.println("Fabricante: " + this.fabricante);
     System.out.println("Data de Fabricação: " + this.dataDeFabricacao);
     System.out.println("Data de Validade: " + this.dataDeValidade);
+    System.out.println("Quantidade em estoque: " + this.quantidade);
     System.out.println("--------------------");
   }
 }

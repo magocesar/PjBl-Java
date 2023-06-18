@@ -4,11 +4,19 @@ public abstract class Produto{
   protected int id;
   protected String nome; 
   protected double preco;
-  protected int quantidade;
   protected String descricao;
   protected String fabricante; 
   protected String dataDeFabricacao; 
   protected String dataDeValidade; 
+  protected int quantidade;
+
+  public int getQuantidade() {
+    return quantidade;
+  }
+
+  public void setQuantidade(int quantidade) {
+    this.quantidade = quantidade;
+  }
 
   public int getId() {
     return id;
@@ -66,7 +74,7 @@ public void setId(int id) {
     this.dataDeValidade = dataDeValidade; 
   }
 
-  public Produto(int id, String nome, double preco, int quantidade, String descricao, String fabricante, String dataDeFabricacao, String dataDeValidade){
+  public Produto(int id, String nome, double preco, String descricao, String fabricante, String dataDeFabricacao, String dataDeValidade, int quantidade){
     this.id = id;
     this.nome = nome; 
     this.preco = preco; 
@@ -75,6 +83,7 @@ public void setId(int id) {
     this.fabricante = fabricante;
     this.dataDeFabricacao = dataDeFabricacao; 
     this.dataDeValidade = dataDeValidade; 
+    this.quantidade = quantidade;
   }
 
   abstract public void exibirPrateleira();

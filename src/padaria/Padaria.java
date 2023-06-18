@@ -863,6 +863,7 @@ public class Padaria {
         while(!enderecoValido){
             try{
                 System.out.print("Digite o endereço do cliente: ");
+                scanner.nextLine();
                 endereco = scanner.nextLine();
             }catch(Exception e){
                 System.out.println("Endereço inválido!");
@@ -1092,8 +1093,9 @@ public class Padaria {
             System.out.println("2 - Adicionar produto produzido");
             System.out.println("3 - Adicionar ingrediente");
             System.out.println("--------------------");
-            System.out.println("Para voltar ao menu anterior, digite '0'");
+            System.out.println("Para voltar, digite '0'");
             System.out.println("--------------------");
+
             
             boolean opcao_valida = false;
 
@@ -1136,10 +1138,10 @@ public class Padaria {
             System.out.println("\n--------------------");
             System.out.println("1 - Remover produto industrializado");
             System.out.println("2 - Remover produto produzido");
-            System.out.println("3 - Remover ingrediente");
             System.out.println("--------------------");
-            System.out.println("Para voltar ao menu anterior, digite '0'");
+            System.out.println("Para voltar, digite '0'");
             System.out.println("--------------------");
+
             boolean opcao_valida = false;
 
             while(!opcao_valida){
@@ -1169,14 +1171,6 @@ public class Padaria {
                     }
                     
                     break;
-                case "3":
-                    try{
-                        estoque.removerIngrediente(scanner);
-                    }catch(NoIdInDatabaseException e){
-                        System.out.println(e.getMessage());
-                    }
-                    
-                    break;
                 case "0":
                     System.out.println("Voltando ao menu principal...");
                     return;
@@ -1196,10 +1190,10 @@ public class Padaria {
             System.out.println("\n--------------------");
             System.out.println("1 - Exibir produtos industrializados");
             System.out.println("2 - Exibir produtos produzidos");
-            System.out.println("3 - Exibir ingredientes");
             System.out.println("--------------------");
-            System.out.println("Para voltar ao menu anterior, digite '0'");
-            System.out.println("-------------------");
+            System.out.println("Para voltar, digite '0'");
+            System.out.println("--------------------");
+
             boolean opcao_valida = false;
 
             while(!opcao_valida){
@@ -1218,9 +1212,6 @@ public class Padaria {
                     break;
                 case "2":
                     estoque.exibirProdutosProduzidos();
-                    break;
-                case "3":
-                    estoque.exibirIngredientes();
                     break;
                 case "0":
                     System.out.println("Voltando ao menu principal...");
