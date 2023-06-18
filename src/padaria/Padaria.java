@@ -5,6 +5,7 @@ import java.util.Scanner;
 import personas.*;
 import excep.*;
 import estoque.*;
+import vendas.*;
 
 public class Padaria {
     private String nome;
@@ -12,6 +13,7 @@ public class Padaria {
     private ArrayList<Funcionario> funcionarios = new ArrayList<Funcionario>();
     private ArrayList<Cliente> clientes = new ArrayList<Cliente>();
     private estoque estoque = new estoque();
+    private ArrayList<venda> vendas = new ArrayList<venda>();
 
     public String getNome() {
         return nome;
@@ -31,11 +33,13 @@ public class Padaria {
         this.cnpj = cnpj;
     }
 
-    public Padaria(String nome, String cnpj, ArrayList<Funcionario> funcionarios, ArrayList<Cliente> clientes) {
+    public Padaria(String nome, String cnpj, ArrayList<Funcionario> funcionarios, ArrayList<Cliente> clientes, estoque estoque, ArrayList<venda> vendas) {
         this.nome = nome;
         this.cnpj = cnpj;
         this.funcionarios = funcionarios;
         this.clientes = clientes;
+        this.estoque = estoque;
+        this.vendas = vendas;
     }
 
     public boolean procurarCpf(String cpf){
