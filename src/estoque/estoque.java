@@ -6,10 +6,10 @@ import produtos.*;
 import personas.*;
 
 public class estoque {
-    protected int id = 1;
-    protected ArrayList<produtoIndustrializado> produtoIndustrializados = new ArrayList<produtoIndustrializado>();
+    private int id = 1;
+    private ArrayList<produtoIndustrializado> produtoIndustrializado = new ArrayList<produtoIndustrializado>();
 
-    protected ArrayList<produtoProduzido> produtoProduzido = new ArrayList<produtoProduzido>();
+    private ArrayList<produtoProduzido> produtoProduzido = new ArrayList<produtoProduzido>();
 
     public void adicionarProdutoIndustrializado(Scanner scanner){
         String nome = null; 
@@ -216,7 +216,7 @@ public class estoque {
             return;
         }
 
-        this.produtoIndustrializados.add(new produtoIndustrializado(this.id, nome, preco, descricao, fabricante, dataDeFabricacao, dataDeValidade, quantidade));
+        this.produtoIndustrializado.add(new produtoIndustrializado(this.id, nome, preco, descricao, fabricante, dataDeFabricacao, dataDeValidade, quantidade));
         this.id++;
         System.out.println("Produto Industrializado adicionado com sucesso!");
     }
@@ -432,7 +432,8 @@ public class estoque {
     }
 
     public void removerProdutoIndustrializado(Scanner scanner) throws NoIdInDatabaseException{
-        if(this.produtoIndustrializados.size() == 0){
+
+        if(this.produtoIndustrializado.size() == 0){
             System.out.println("Não há produtos industrializados cadastrados!");
             return;
         }
@@ -443,9 +444,13 @@ public class estoque {
 
         while(!idValido){
             try{
-                System.out.println("Para cancelar digite '0'! \n" );
+                System.out.println("--------------------");
+                System.out.print("Remoção de Produto Industrializado: ");
+                System.out.println("\nPara cancelar, digite '0'");
+                System.out.println("--------------------");
                 System.out.print("Digite o id do produto industrializado: ");
                 id = scanner.nextInt();
+                scanner.nextLine();
             }catch(Exception e){
                 System.out.println("Id inválido!");
             }
@@ -462,8 +467,9 @@ public class estoque {
             }
         }
 
-        for(int i = 0; i < this.produtoIndustrializados.size(); i++){
-            if(this.produtoIndustrializados.get(i).getId()==0){
+        for(int i = 0; i < this.produtoIndustrializado.size(); i++){
+            if(this.produtoIndustrializado.get(i).getId() == id){
+{
                 boolean opValida = false;
                 String op = null;
                 ArrayList<String> ops = new ArrayList<String>(){
@@ -474,7 +480,7 @@ public class estoque {
                 };
                 while(!opValida){
                     try{
-                        System.out.print("Confirma a remoção do produto " + this.produtoIndustrializados.get(i).getNome() + "? (S / N): ");
+                        System.out.print("Confirma a remoção do produto " + this.produtoIndustrializado.get(i).getNome() + "? (S / N): ");
                         op = scanner.nextLine();
                     }catch(Exception e){
                         System.out.println("Opção inválida!");
@@ -492,7 +498,7 @@ public class estoque {
                     return;
                 }
 
-                this.produtoIndustrializados.remove(i);
+                this.produtoIndustrializado.remove(i);
                 idEncontrado = true;
                 break;
             }
@@ -502,6 +508,7 @@ public class estoque {
             System.out.println("Produto removido com sucesso!");
         }else{
             throw new NoIdInDatabaseException("Id não encontrado no banco de dados!", id);
+        }
         }
     }
 
@@ -517,9 +524,13 @@ public class estoque {
 
         while(!idValido){
             try{
-                System.out.println("Para cancelar digite '0'! \n" );
-                System.out.print("Digite o id do Produto Produzido: ");
+                System.out.println("--------------------");
+                System.out.print("Remoção de Produto Industrializado: ");
+                System.out.println("\nPara cancelar, digite '0'");
+                System.out.println("--------------------");
+                System.out.print("Digite o id do produto industrializado: ");
                 id = scanner.nextInt();
+                scanner.nextLine();
             }catch(Exception e){
                 System.out.println("Id inválido!");
             }
@@ -537,7 +548,7 @@ public class estoque {
         }
 
         for(int i = 0; i < this.produtoProduzido.size(); i++){
-            if(this.produtoProduzido.get(i).getId()==0){
+            if(this.produtoProduzido.get(i).getId() == id){
                 boolean opValida = false;
                 String op = null;
                 ArrayList<String> ops = new ArrayList<String>(){
@@ -581,12 +592,12 @@ public class estoque {
 
     public void exibirProdutosIndustrializados(){
         System.out.println("Produtos industrializados: ");
-        if(this.produtoIndustrializados.size() == 0){
-            System.out.println("Não há produtoIndustrializados cadastrados!");
+        if(this.produtoIndustrializado.size() == 0){
+            System.out.println("Não há produtoIndustrializado cadastrados!");
         }else{
-            for(int i = 0; i < this.produtoIndustrializados.size(); i++){
+            for(int i = 0; i < this.produtoIndustrializado.size(); i++){
                 System.out.println("Produto Industrializado " + (i+1) + ": ");
-                this.produtoIndustrializados.get(i).exibirPrateleira();
+                this.produtoIndustrializado.get(i).exibirPrateleira();
             }
         }
     }
