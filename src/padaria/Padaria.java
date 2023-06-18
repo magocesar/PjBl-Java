@@ -1262,6 +1262,19 @@ public class Padaria {
         Atendente atendente = null;
         Cliente cliente = null;
         boolean cliente_nao_existe = true;
+
+        //Verificar se existe atendente cadastrado
+        if(funcionarios.isEmpty()){
+            System.out.println("Não há atendentes cadastrados!");
+            return;
+        }
+
+        //Verificar se existe produto no estoque
+        if(estoque.getProdutoIndustrializado().isEmpty() && estoque.getProdutoProduzido().isEmpty()){
+            System.out.println("Não há produtos no estoque!");
+            return;
+        }
+
         while(!sair){
             try{
                 System.out.println("\n--------------------");
@@ -1368,7 +1381,14 @@ public class Padaria {
                 }
             }
             if(op.equals("S")){
-                estoque.novaVenda(scanner, atendente, cliente);
+                pedido pedido = estoque.novaVenda(scanner, atendente, cliente);
+                if(pedido != null){
+                    vendas.add(pedido);
+                    System.out.println("Venda realizada com sucesso!");
+                }else{
+                    System.out.println("Venda não realizada!");
+                }
+
                 sair = true;
             }else{	
                 System.out.println("Voltando ao menu anterior...");

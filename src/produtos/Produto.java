@@ -88,4 +88,6 @@ public void setId(int id) {
 
   abstract public void exibirPrateleira();
 
+  abstract public void exibirProdutoCarrinho();
+
 }

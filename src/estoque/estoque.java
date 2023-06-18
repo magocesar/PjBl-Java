@@ -1,4 +1,5 @@
 package estoque;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Scanner;
 import excep.NoIdInDatabaseException;
@@ -11,6 +12,50 @@ public class estoque {
     private ArrayList<produtoIndustrializado> produtoIndustrializado = new ArrayList<produtoIndustrializado>();
 
     private ArrayList<produtoProduzido> produtoProduzido = new ArrayList<produtoProduzido>();
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public ArrayList<produtoIndustrializado> getProdutoIndustrializado() {
+        return produtoIndustrializado;
+    }
+
+    public void setProdutoIndustrializado(ArrayList<produtoIndustrializado> produtoIndustrializado) {
+        this.produtoIndustrializado = produtoIndustrializado;
+    }
+
+    public ArrayList<produtoProduzido> getProdutoProduzido() {
+        return produtoProduzido;
+    }
+
+    public void setProdutoProduzido(ArrayList<produtoProduzido> produtoProduzido) {
+        this.produtoProduzido = produtoProduzido;
+    }
+
+    public void exibirEstoque(){
+        System.out.println("--------------------");
+        System.out.println("Produtos Industrializados");
+        if(this.produtoIndustrializado.size() == 0){
+            System.out.println("Nenhum produto industrializado cadastrado.");
+        }else{
+            for(produtoIndustrializado produto : this.produtoIndustrializado){
+                produto.exibirPrateleira();
+            }
+        }
+        System.out.println("Produtos Produzidos");
+        if(this.produtoProduzido.size() == 0){
+            System.out.println("Nenhum produto produzido cadastrado.");
+        }else{
+            for(produtoProduzido produto : this.produtoProduzido){
+                produto.exibirPrateleira();
+            }
+        }
+    }
 
     public void adicionarProdutoIndustrializado(Scanner scanner){
         String nome = null; 
@@ -615,8 +660,19 @@ public class estoque {
         }
     }
 
-    public void novaVenda(Scanner scanner, Atendente atendente, Cliente cliente){
+    public pedido novaVenda(Scanner scanner, Atendente atendente, Cliente cliente){
         ArrayList<Produto> produtos = new ArrayList<Produto>();
+        
+        ArrayList<produtoIndustrializado> CopiaprodutosIndustrializados = new ArrayList<produtoIndustrializado>();
+        for(int i = 0; i < this.produtoIndustrializado.size(); i++){
+            CopiaprodutosIndustrializados.add(this.produtoIndustrializado.get(i));
+        }
+        
+        ArrayList<produtoProduzido> CopiaprodutosProduzidos = new ArrayList<produtoProduzido>();
+        for(int i = 0; i < this.produtoProduzido.size(); i++){
+            CopiaprodutosProduzidos.add(this.produtoProduzido.get(i));
+        }
+        
         ArrayList<String> ops = new ArrayList<String>(){
             {
                 add("S");
@@ -629,29 +685,24 @@ public class estoque {
         while(!sair){
             boolean opValida = false;
             while(!opValida){
-                
-                //Exibir produtos
-                System.out.println("Produtos industrializados: ");
-                if(this.produtoIndustrializado.size() == 0){
-                    System.out.println("Não há produtoIndustrializado cadastrados!");
-                }else{
-                    for(int i = 0; i < this.produtoIndustrializado.size(); i++){
-                        System.out.println("Produto Industrializado " + (i+1) + ": ");
-                        this.produtoIndustrializado.get(i).exibirPrateleira();
-                    }
-                }
 
-                System.out.println("Produtos Produzidos: ");
-                if(this.produtoProduzido.size() == 0){
-                    System.out.println("Não há Produtos Produzidos cadastrados!");
+                //Exibir produtos
+                this.exibirEstoque();
+
+                //Exibir produtos no carrinho
+                System.out.println("--------------------");
+                System.out.println("Produtos no carrinho: ");
+                if(produtos.size() == 0){
+                    System.out.println("Não há produtos no carrinho!");
                 }else{
-                    for(int i = 0; i < this.produtoProduzido.size(); i++){
-                        System.out.println("Cliente " + (i+1) + ": ");
-                        this.produtoProduzido.get(i).exibirPrateleira();
+                    for(int i = 0; i < produtos.size(); i++){
+                        System.out.println("Produto " + (i+1) + ": ");
+                        produtos.get(i).exibirProdutoCarrinho();
                     }
                 }
 
                 try{
+                    System.out.println("--------------------");
                     System.out.print("Deseja adicionar um produto? (S / N): ");
                     op = scanner.nextLine();
                 }catch(Exception e){
@@ -670,37 +721,78 @@ public class estoque {
             }else{
                 boolean idValido = false;
                 int id = 0;
+                int quantidade = 0;
                 while(!idValido){
                     try{
                         System.out.print("Digite o id do produto: ");
                         id = scanner.nextInt();
                         scanner.nextLine();
+                        System.out.println("Digite a quantidade: ");
+                        quantidade = scanner.nextInt();
                     }catch(Exception e){
                         System.out.println("Id inválido!");
                     }
 
                     if(id < 0){
                         System.out.println("Id inválido!");
+                    }else if(quantidade < 0){
+                        System.out.println("Quantidade inválida!");
                     }else{
                         idValido = true;
                     }
                 }
 
                 boolean idEncontrado = false;
-                for(int i = 0; i < this.produtoIndustrializado.size(); i++){
-                    if(this.produtoIndustrializado.get(i).getId() == id){
-                        produtos.add(this.produtoIndustrializado.get(i));
-                        idEncontrado = true;
-                        break;
+                for(int i = 0; i < CopiaprodutosIndustrializados.size(); i++){
+                    if(CopiaprodutosIndustrializados.get(i).getId() == id){
+                        if(CopiaprodutosIndustrializados.get(i).getQuantidade() == 0){
+                            System.out.println("Produto sem estoque!");
+                            idEncontrado = true;
+                            break;
+                        }else{
+                            if(CopiaprodutosIndustrializados.get(i).getQuantidade() < quantidade){
+                                System.out.println("Quantidade indisponível!");
+                                idEncontrado = true;
+                                break;
+                            }
+
+                            produtoIndustrializado produtoClasse = CopiaprodutosIndustrializados.get(i);
+
+                            produtoIndustrializado produtoAux = new produtoIndustrializado(produtoClasse.getId(), produtoClasse.getNome(), produtoClasse.getPreco(), produtoClasse.getDescricao(), produtoClasse.getFabricante(), produtoClasse.getDataDeFabricacao(), produtoClasse.getDataDeValidade(), quantidade);
+
+                            produtos.add(produtoAux);
+                            
+                            CopiaprodutosIndustrializados.get(i).setQuantidade(this.produtoIndustrializado.get(i).getQuantidade() - quantidade);
+                            idEncontrado = true;
+                            break;
+                        }
                     }
                 }
 
                 if(!idEncontrado){
-                    for(int i = 0; i < this.produtoProduzido.size(); i++){
-                        if(this.produtoProduzido.get(i).getId() == id){
-                            produtos.add(this.produtoProduzido.get(i));
-                            idEncontrado = true;
-                            break;
+                    for(int i = 0; i < CopiaprodutosProduzidos.size(); i++){
+                        if(CopiaprodutosProduzidos.get(i).getId() == id){
+                            if(CopiaprodutosProduzidos.get(i).getQuantidade() == 0){
+                                System.out.println("Produto sem estoque!");
+                                idEncontrado = true;
+                                break;
+                            }else{
+                                if(CopiaprodutosProduzidos.get(i).getQuantidade() < quantidade){
+                                    System.out.println("Quantidade indisponível!");
+                                    idEncontrado = true;
+                                    break;
+                                }
+
+                                produtoProduzido produtoClasse = this.produtoProduzido.get(i);
+
+                                produtoProduzido produtoAux = new produtoProduzido(produtoClasse.getId(), produtoClasse.getNome(), produtoClasse.getPreco(), produtoClasse.getDescricao(), produtoClasse.getFabricante(), produtoClasse.getDataDeFabricacao(), produtoClasse.getDataDeValidade(), quantidade);
+
+                                produtos.add(produtoAux);
+                                
+                                CopiaprodutosProduzidos.get(i).setQuantidade(this.produtoProduzido.get(i).getQuantidade() - quantidade);
+                                idEncontrado = true;
+                                break;
+                            }
                         }
                     }
                 }
@@ -711,10 +803,12 @@ public class estoque {
             }
         }
 
-        this.confirmarPedido(scanner, atendente, cliente, produtos);
+        pedido pedido = this.confirmarPedido(scanner, atendente, cliente, produtos, CopiaprodutosIndustrializados, CopiaprodutosProduzidos);
+
+        return pedido;
     }    
 
-    public pedido confirmarPedido(Scanner scanner, Atendente atendente, Cliente cliente, ArrayList<Produto> produtos){
+    public pedido confirmarPedido(Scanner scanner, Atendente atendente, Cliente cliente, ArrayList<Produto> produtos, ArrayList<produtoIndustrializado> CopiaprodutosIndustrializados, ArrayList<produtoProduzido> CopiaprodutosProduzidos){
         boolean opValida = false;
         String op = null;
         ArrayList<String> ops = new ArrayList<String>(){
@@ -725,6 +819,14 @@ public class estoque {
         };
         while(!opValida){
             try{
+                //Exibir produtos selecionados
+                System.out.println("Produtos selecionados: ");
+                for(int i = 0; i < produtos.size(); i++){
+                    System.out.println("Produto " + (i+1) + ": ");
+                    produtos.get(i).exibirProdutoCarrinho();
+                }
+                System.out.println("Valor total: " + this.calcularValorPedido(produtos));
+                System.out.println("------------------------------------");
                 System.out.print("Deseja confirmar a venda? (S / N): ");
                 op = scanner.nextLine();
             }catch(Exception e){
@@ -743,9 +845,21 @@ public class estoque {
             return null;
         }
 
+        this.produtoIndustrializado = CopiaprodutosIndustrializados;
+        this.produtoProduzido = CopiaprodutosProduzidos;
+
         pedido pedido = new pedido(atendente, cliente, produtos);
 
         return pedido;
+    }
+
+    public double calcularValorPedido(ArrayList<Produto> produtos){
+        double valorTotal = 0;
+        for(int i = 0; i < produtos.size(); i++){
+            valorTotal += produtos.get(i).getPreco() * produtos.get(i).getQuantidade();
+        }
+
+        return valorTotal;
     }
 }
 
