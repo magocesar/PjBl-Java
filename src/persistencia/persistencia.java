@@ -46,8 +46,8 @@ public class persistencia implements Serializable {
 
     public static ArrayList<Cliente> lerClientes() throws FileNotFoundException, IOException, ClassNotFoundException{
         ArrayList<Cliente> ListaCliente = new ArrayList<Cliente>();
-        if(ListaFuncionarios.isFile()){
-            ois = new ObjectInputStream(new FileInputStream(ListaFuncionarios)); 
+        if(ListaClientes.isFile()){
+            ois = new ObjectInputStream(new FileInputStream(ListaClientes)); 
             ListaCliente = (ArrayList<Cliente>)ois.readObject();
             ois.close();
         }
