@@ -1125,7 +1125,7 @@ public class Padaria {
         }
     }
 
-    public void exibirMenuRemover(Scanner scanner){
+    public void exibirMenuRemover(Scanner scanner) throws FileNotFoundException, IOException{
         String opcao = null;
         boolean sair = false;
 
@@ -1219,7 +1219,7 @@ public class Padaria {
         }
     }
 
-    public void exibirMenuVendas(Scanner scanner){
+    public void exibirMenuVendas(Scanner scanner) throws FileNotFoundException, ClassNotFoundException, IOException{
         String opcao = null;
         boolean sair = false;
 
@@ -1269,7 +1269,7 @@ public class Padaria {
         }
     }
 
-    public void prepararVenda(Scanner scanner){
+    public void prepararVenda(Scanner scanner) throws FileNotFoundException, ClassNotFoundException, IOException{
         boolean sair = false;
         Atendente atendente = null;
         Cliente cliente = null;

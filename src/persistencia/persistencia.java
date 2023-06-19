@@ -14,6 +14,7 @@ public class persistencia implements Serializable {
     public static File produtoIndustrializados = new File("produtoIndustrializados.txt");
     public static File ProdutosProduzidos = new File("ProdutosProduzidos.txt");
     public static File ListaPedidos = new File("pedidos.txt");
+    public static File ultimoIDFile = new File("ultimoID.txt");
 
     private static ObjectOutputStream oos = null;
     private static ObjectInputStream ois = null;
@@ -103,15 +104,32 @@ public class persistencia implements Serializable {
         return ListaPedido;
     }
 
-    public static void SalvaUltimoID(int id){
+        private static BufferedWriter bufferedWriter;
+        private static BufferedReader bufferedReader;
 
+      public static void SalvaUltimoID(int id) {
+        try {
+            bufferedWriter = new BufferedWriter(new FileWriter(ultimoIDFile));
+            bufferedWriter.write(String.valueOf(id));
+            bufferedWriter.close();
+            System.out.println("Último ID salvo com sucesso!");
+        } catch (IOException e) {
+            System.out.println("Erro ao salvar o último ID: " + e.getMessage());
+        }
     }
 
-    public static int LerUltimoID(){
- //       int id = ler a string, trasformar em int
-
- //       return id; retornar a int
+    public static int LerUltimoID() {
+        int ultimoID = 0;
+        try {
+            bufferedReader = new BufferedReader(new FileReader(ultimoIDFile));
+            String linha = bufferedReader.readLine();
+            if (linha != null) {
+                ultimoID = Integer.parseInt(linha);
+            }
+            bufferedReader.close();
+        } catch (IOException e) {
+            System.out.println("Erro ao ler o último ID: " + e.getMessage());
+        }
+        return ultimoID;
     }
-    
-
 }
