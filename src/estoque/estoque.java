@@ -17,10 +17,10 @@ public class estoque implements Serializable {
     private ArrayList<produtoIndustrializado> produtoIndustrializado = new ArrayList<produtoIndustrializado>();
     private ArrayList<produtoProduzido> produtoProduzido = new ArrayList<produtoProduzido>();
 
-    public estoque() throws FileNotFoundException, ClassNotFoundException, IOException{
-        this.id = persistencia.LerUltimoID();
-        this.produtoIndustrializado = persistencia.LerIndustrializados();
-    }
+//    public estoque() throws FileNotFoundException, ClassNotFoundException, IOException{
+ //       this.id = persistencia.LerUltimoID();
+//        this.produtoIndustrializado = persistencia.LerIndustrializados();
+//    }
 
     public int getId() {
         return id;

@@ -18,7 +18,7 @@ public class persistencia implements Serializable {
 
     public static void SalvaFuncionarios(ArrayList<Funcionario> ListaFuncionario) throws FileNotFoundException, IOException{
         oos = new ObjectOutputStream(new FileOutputStream(ListaFuncionarios));
-        oos.writeObject(ListaFuncionarios);
+        oos.writeObject(ListaFuncionario);
         oos.close();
     }
 
@@ -52,7 +52,7 @@ public class persistencia implements Serializable {
 
     }
 
-    public int LerUltimoID(){
+    public static int LerUltimoID(){
  //       int id = ler a string, trasformar em int
 
  //       return id; retornar a int

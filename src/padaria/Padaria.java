@@ -32,18 +32,10 @@ public class Padaria {
         this.cnpj = cnpj;
     }
 
-    public Padaria(String nome, String cnpj) {
+    public Padaria(String nome, String cnpj) throws FileNotFoundException, ClassNotFoundException, IOException {
         this.nome = nome;
         this.cnpj = cnpj;
-    }
-
-    public Padaria(String nome, String cnpj, ArrayList<Funcionario> funcionarios, ArrayList<Cliente> clientes, estoque estoque, ArrayList<pedido> vendas) {
-        this.nome = nome;
-        this.cnpj = cnpj;
-        this.funcionarios = funcionarios;
-        this.clientes = clientes;
-        this.estoque = estoque;
-        this.vendas = vendas;
+        this.funcionarios = persistencia.lerFuncionarios();
     }
 
     public boolean procurarCpf(String cpf){
@@ -112,7 +104,7 @@ public class Padaria {
         }
     }
 
-    public void exibirMenuFuncionarios(Scanner scanner){
+    public void exibirMenuFuncionarios(Scanner scanner) throws FileNotFoundException, IOException, ClassNotFoundException{
         String opcao = null;
         boolean sair = false;
 
@@ -166,7 +158,7 @@ public class Padaria {
         }
     }
 
-    public void adicionarFuncionario(Scanner scanner){
+    public void adicionarFuncionario(Scanner scanner) throws FileNotFoundException, IOException{
         String opcao = null;
         boolean sair = false;
 
@@ -205,7 +197,7 @@ public class Padaria {
         }
     }
 
-    public void adicionarAtendente(Scanner scanner){
+    public void adicionarAtendente(Scanner scanner) throws FileNotFoundException, IOException{
         String nome = null;
         String cpf = null;
         String sexo = null;
@@ -404,6 +396,7 @@ public class Padaria {
         }
 
         this.funcionarios.add(new Atendente(nome, cpf, sexo, idade, salario, turno, 0));
+        persistencia.SalvaFuncionarios(funcionarios);
         System.out.println("Atendente adicionado com sucesso!");
         return;
     }
@@ -688,7 +681,7 @@ public class Padaria {
         }
     }
 
-    public void exibirFuncionários(){
+    public void exibirFuncionários() throws FileNotFoundException, ClassNotFoundException, IOException{
         System.out.println("Funcionários: ");
         if(this.funcionarios.size() == 0){
             System.out.println("Não há funcionários cadastrados!");
