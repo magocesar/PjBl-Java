@@ -18,7 +18,7 @@ public class estoque implements Serializable {
     private ArrayList<produtoProduzido> produtoProduzido = new ArrayList<produtoProduzido>();
 
     public estoque() throws FileNotFoundException, ClassNotFoundException, IOException{
- //       this.id = persistencia.LerUltimoID();
+       this.id = persistencia.LerUltimoID();
        this.produtoIndustrializado = persistencia.LerIndustrializados();
        this.produtoProduzido = persistencia.LerProduzidos();
     }
@@ -486,6 +486,7 @@ public class estoque implements Serializable {
 
         this.produtoProduzido.add(new produtoProduzido(this.id, nome, preco, descricao, fabricante, dataDeFabricacao, dataDeValidade, quantidade));
         this.id++;
+        persistencia.SalvaUltimoID(id);
         persistencia.SalvaProduzidos(produtoProduzido);
         System.out.println("Produto Produzido adicionado com sucesso!");
     }

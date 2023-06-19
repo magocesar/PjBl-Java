@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import estoque.*;
 import personas.*;
 import produtos.*;
+import vendas.pedido;
 
 public class persistencia implements Serializable {
 
@@ -88,38 +89,39 @@ public class persistencia implements Serializable {
     }
 
     //pedidos
-    public static void SalvaPedidos(ArrayList<Produto> ListaPedido) throws FileNotFoundException, IOException{
+    public static void SalvaPedidos(ArrayList<pedido> ListaPedido) throws FileNotFoundException, IOException{
         oos = new ObjectOutputStream(new FileOutputStream(ListaPedidos));
         oos.writeObject(ListaPedido);
         oos.close();
     }
 
-    public static ArrayList<Produto> LerPedidos() throws FileNotFoundException, IOException, ClassNotFoundException{
-        ArrayList<Produto> ListaPedido = new ArrayList<Produto>();
-        if(produtoIndustrializados.isFile()){
+    public static ArrayList<pedido> LerPedidos() throws FileNotFoundException, IOException, ClassNotFoundException{
+        ArrayList<pedido> ListaPedido = new ArrayList<pedido>();
+        if(ListaPedidos.isFile()){
             ois = new ObjectInputStream(new FileInputStream(ListaPedidos)); 
-            ListaPedido = (ArrayList<Produto>)ois.readObject();
+            ListaPedido = (ArrayList<pedido>)ois.readObject();
             ois.close();
         }
         return ListaPedido;
     }
 
-        private static BufferedWriter bufferedWriter;
-        private static BufferedReader bufferedReader;
+
+    //Last ID
+    private static BufferedWriter bufferedWriter;
+    private static BufferedReader bufferedReader;
 
       public static void SalvaUltimoID(int id) {
         try {
             bufferedWriter = new BufferedWriter(new FileWriter(ultimoIDFile));
             bufferedWriter.write(String.valueOf(id));
             bufferedWriter.close();
-            System.out.println("Último ID salvo com sucesso!");
         } catch (IOException e) {
             System.out.println("Erro ao salvar o último ID: " + e.getMessage());
         }
     }
 
     public static int LerUltimoID() {
-        int ultimoID = 0;
+        int ultimoID = 1;
         try {
             bufferedReader = new BufferedReader(new FileReader(ultimoIDFile));
             String linha = bufferedReader.readLine();

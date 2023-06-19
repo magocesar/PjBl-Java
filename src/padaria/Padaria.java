@@ -37,6 +37,7 @@ public class Padaria {
         this.cnpj = cnpj;
         this.funcionarios = persistencia.lerFuncionarios();
         this.clientes = persistencia.lerClientes();
+        this.vendas = persistencia.LerPedidos();
     }
 
     public boolean procurarCpf(String cpf){
@@ -1246,6 +1247,7 @@ public class Padaria {
             switch(opcao){
                 case "1":
                     this.prepararVenda(scanner);
+                    break;
                 case "2":
                     if(vendas.isEmpty()){
                         System.out.println("\n--------------------");
@@ -1255,7 +1257,7 @@ public class Padaria {
                     }
                     System.out.println("\n--------------------");
                     System.out.println("Vendas cadastradas: ");
-                    for(pedido venda : vendas){
+                    for(pedido venda :vendas){
                         venda.exibirPedido();
                     }
                     break;
@@ -1399,6 +1401,7 @@ public class Padaria {
                 if(pedido != null){
 
                     vendas.add(pedido);
+                    persistencia.SalvaPedidos(vendas);
                     Cliente cliente_pedido = pedido.getCliente();
                     Atendente atendente_pedido = pedido.getAtendente();
 
