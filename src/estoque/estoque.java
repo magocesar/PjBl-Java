@@ -3,17 +3,24 @@ package estoque;
 import java.util.ArrayList;
 import java.util.Scanner;
 import excep.NoIdInDatabaseException;
+import persistencia.persistencia;
+
+import java.io.*;
+
+
 import produtos.*;
 import personas.*;
 import vendas.*;
-import persistencia.*;
 
-public class estoque {
-    private int id = 1;
-
+public class estoque implements Serializable {
+    private int id;
     private ArrayList<produtoIndustrializado> produtoIndustrializado = new ArrayList<produtoIndustrializado>();
-
     private ArrayList<produtoProduzido> produtoProduzido = new ArrayList<produtoProduzido>();
+
+    public estoque() throws FileNotFoundException, ClassNotFoundException, IOException{
+        this.id = persistencia.LerUltimoID();
+        this.produtoIndustrializado = persistencia.LerIndustrializados();
+    }
 
     public int getId() {
         return id;
@@ -59,7 +66,7 @@ public class estoque {
         }
     }
 
-    public void adicionarProdutoIndustrializado(Scanner scanner){
+    public void adicionarProdutoIndustrializado(Scanner scanner) throws FileNotFoundException, IOException{
         String nome = null; 
         double preco = 0;
         String descricao = null;
@@ -266,6 +273,8 @@ public class estoque {
 
         this.produtoIndustrializado.add(new produtoIndustrializado(this.id, nome, preco, descricao, fabricante, dataDeFabricacao, dataDeValidade, quantidade));
         this.id++;
+        persistencia.SalvaUltimoID(id);
+        persistencia.SalvaIndustrializados(produtoIndustrializado);
         System.out.println("Produto Industrializado adicionado com sucesso!");
     }
 
@@ -638,7 +647,7 @@ public class estoque {
         }
     }
 
-    public void exibirProdutosIndustrializados(){
+    public void exibirProdutosIndustrializados() throws FileNotFoundException, ClassNotFoundException, IOException{
         System.out.println("Produtos industrializados: ");
         if(this.produtoIndustrializado.size() == 0){
             System.out.println("Não há produtoIndustrializado cadastrados!");

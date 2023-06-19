@@ -1,6 +1,8 @@
-package produtos; 
+package produtos;
 
-public abstract class Produto{
+import java.io.Serializable;
+
+public abstract class Produto implements Serializable{
   protected int id;
   protected String nome; 
   protected double preco;

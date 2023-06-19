@@ -1,5 +1,6 @@
 package padaria;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -59,7 +60,7 @@ public class Padaria {
         return false;
     }
     
-    public void exibirMenuPadaria(){
+    public void exibirMenuPadaria() throws FileNotFoundException, IOException, ClassNotFoundException{
         String opcao = null;
         boolean sair = false;
         Scanner scanner = new Scanner(System.in);
@@ -1035,7 +1036,7 @@ public class Padaria {
         }
     }
 
-    public void exibirMenuEstoque(Scanner scanner){
+    public void exibirMenuEstoque(Scanner scanner) throws FileNotFoundException, IOException, ClassNotFoundException{
         String opcao = null;
         boolean sair = false;
 
@@ -1084,7 +1085,7 @@ public class Padaria {
         }
     }
 
-    public void exibirMenuAdicionar(Scanner scanner){
+    public void exibirMenuAdicionar(Scanner scanner) throws FileNotFoundException, IOException{
         String opcao = null;
         boolean sair = false;
 
@@ -1179,7 +1180,7 @@ public class Padaria {
         }
     }
     
-    public void exibirMenuExibirProdutos(Scanner scanner){
+    public void exibirMenuExibirProdutos(Scanner scanner) throws FileNotFoundException, ClassNotFoundException, IOException{
         String opcao = null;
         boolean sair = false;
 

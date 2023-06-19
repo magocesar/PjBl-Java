@@ -1,12 +1,13 @@
 package vendas;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import personas.Atendente;
 import personas.Cliente;
 import produtos.Produto;
 
-public class pedido {
+public class pedido implements Serializable{
   private Atendente atendente; 
   private Cliente cliente; 
 
