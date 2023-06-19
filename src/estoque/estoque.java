@@ -17,10 +17,11 @@ public class estoque implements Serializable {
     private ArrayList<produtoIndustrializado> produtoIndustrializado = new ArrayList<produtoIndustrializado>();
     private ArrayList<produtoProduzido> produtoProduzido = new ArrayList<produtoProduzido>();
 
-//    public estoque() throws FileNotFoundException, ClassNotFoundException, IOException{
+    public estoque() throws FileNotFoundException, ClassNotFoundException, IOException{
  //       this.id = persistencia.LerUltimoID();
-//        this.produtoIndustrializado = persistencia.LerIndustrializados();
-//    }
+       this.produtoIndustrializado = persistencia.LerIndustrializados();
+       this.produtoProduzido = persistencia.LerProduzidos();
+    }
 
     public int getId() {
         return id;
@@ -278,7 +279,7 @@ public class estoque implements Serializable {
         System.out.println("Produto Industrializado adicionado com sucesso!");
     }
 
-    public void adicionarProdutoProduzido(Scanner scanner){
+    public void adicionarProdutoProduzido(Scanner scanner) throws FileNotFoundException, IOException{
         String nome = null; 
         double preco = 0;
         String descricao = null;
@@ -485,10 +486,11 @@ public class estoque implements Serializable {
 
         this.produtoProduzido.add(new produtoProduzido(this.id, nome, preco, descricao, fabricante, dataDeFabricacao, dataDeValidade, quantidade));
         this.id++;
+        persistencia.SalvaProduzidos(produtoProduzido);
         System.out.println("Produto Produzido adicionado com sucesso!");
     }
 
-    public void removerProdutoIndustrializado(Scanner scanner) throws NoIdInDatabaseException{
+    public void removerProdutoIndustrializado(Scanner scanner) throws NoIdInDatabaseException, FileNotFoundException, IOException{
 
         if(this.produtoIndustrializado.size() == 0){
             System.out.println("Não há produtos industrializados cadastrados!");
@@ -557,6 +559,7 @@ public class estoque implements Serializable {
 
                 this.produtoIndustrializado.remove(i);
                 idEncontrado = true;
+                persistencia.SalvaIndustrializados(produtoIndustrializado);
                 break;
             }
         }
@@ -569,7 +572,7 @@ public class estoque implements Serializable {
         }
     }
 
-    public void removerProdutoProduzido(Scanner scanner) throws NoIdInDatabaseException{
+    public void removerProdutoProduzido(Scanner scanner) throws NoIdInDatabaseException, FileNotFoundException, IOException{
         if(this.produtoProduzido.size() == 0){
             System.out.println("Não há Produtos Produzidos cadastrados!");
             return;
@@ -636,6 +639,7 @@ public class estoque implements Serializable {
 
                 this.produtoProduzido.remove(i);
                 idEncontrado = true;
+                persistencia.SalvaProduzidos(produtoProduzido);
                 break;
             }
         }
@@ -671,7 +675,7 @@ public class estoque implements Serializable {
         }
     }
 
-    public pedido novaVenda(Scanner scanner, Atendente atendente, Cliente cliente){
+    public pedido novaVenda(Scanner scanner, Atendente atendente, Cliente cliente) throws FileNotFoundException, ClassNotFoundException, IOException{
         ArrayList<Produto> produtos = new ArrayList<Produto>();
         
         ArrayList<produtoIndustrializado> CopiaprodutosIndustrializados = new ArrayList<produtoIndustrializado>();
@@ -805,7 +809,6 @@ public class estoque implements Serializable {
                                 produtoProduzido produtoAux = new produtoProduzido(produtoClasse.getId(), produtoClasse.getNome(), produtoClasse.getPreco(), produtoClasse.getDescricao(), produtoClasse.getFabricante(), produtoClasse.getDataDeFabricacao(), produtoClasse.getDataDeValidade(), quantidade);
 
                                 produtos.add(produtoAux);
-                                
                                 CopiaprodutosProduzidos.get(i).setQuantidade(this.produtoProduzido.get(i).getQuantidade() - quantidade);
                                 idEncontrado = true;
                                 break;
@@ -821,11 +824,10 @@ public class estoque implements Serializable {
         }
 
         pedido pedido = this.confirmarPedido(scanner, atendente, cliente, produtos, CopiaprodutosIndustrializados, CopiaprodutosProduzidos);
-
         return pedido;
     }    
 
-    public pedido confirmarPedido(Scanner scanner, Atendente atendente, Cliente cliente, ArrayList<Produto> produtos, ArrayList<produtoIndustrializado> CopiaprodutosIndustrializados, ArrayList<produtoProduzido> CopiaprodutosProduzidos){
+    public pedido confirmarPedido(Scanner scanner, Atendente atendente, Cliente cliente, ArrayList<Produto> produtos, ArrayList<produtoIndustrializado> CopiaprodutosIndustrializados, ArrayList<produtoProduzido> CopiaprodutosProduzidos) throws FileNotFoundException, ClassNotFoundException, IOException{
         boolean opValida = false;
         String op = null;
         ArrayList<String> ops = new ArrayList<String>(){

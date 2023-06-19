@@ -36,6 +36,7 @@ public class Padaria {
         this.nome = nome;
         this.cnpj = cnpj;
         this.funcionarios = persistencia.lerFuncionarios();
+        this.clientes = persistencia.lerClientes();
     }
 
     public boolean procurarCpf(String cpf){
@@ -604,7 +605,7 @@ public class Padaria {
         return;
     }
 
-    public void removerFuncionario(Scanner scanner) throws NoCpfInDatabaseException{
+    public void removerFuncionario(Scanner scanner) throws NoCpfInDatabaseException, FileNotFoundException, IOException{
 
         if(this.funcionarios.size() == 0){
             System.out.println("Não há funcionários cadastrados!");
@@ -666,6 +667,7 @@ public class Padaria {
                 if(op.equals("S")){
                     this.funcionarios.remove(i);
                     cpfEncontrado = true;
+                    persistencia.SalvaFuncionarios(funcionarios);
                     break;
                 }else{
                     System.out.println("Cancelando...");
@@ -693,7 +695,7 @@ public class Padaria {
         }
     }
 
-    public void exibirMenuCliente(Scanner scanner){
+    public void exibirMenuCliente(Scanner scanner) throws FileNotFoundException, IOException{
         String opcao = null;
         boolean sair = false;
 
@@ -746,7 +748,7 @@ public class Padaria {
         }
     }
     
-    public void adicionarCliente(Scanner scanner){
+    public void adicionarCliente(Scanner scanner) throws FileNotFoundException, IOException{
         //Verificar cpf duplicado posteriormente
         String nome = null;
         String cpf = null;
@@ -940,11 +942,12 @@ public class Padaria {
         }
 
         this.clientes.add(new Cliente(nome, cpf, sexo, idade, endereco, telefone, 0));
+        persistencia.SalvaClientes(clientes);
         System.out.println("Cliente adicionado com sucesso!");
         return;
     }
 
-    public void removerCliente(Scanner scanner) throws NoCpfInDatabaseException{
+    public void removerCliente(Scanner scanner) throws NoCpfInDatabaseException, FileNotFoundException, IOException{
         if(this.clientes.size() == 0){
             System.out.println("Não há clientes cadastrados!");
             return;
@@ -1006,6 +1009,7 @@ public class Padaria {
 
                 this.clientes.remove(i);
                 cpfEncontrado = true;
+                persistencia.SalvaClientes(clientes);
                 break;
             }
         }

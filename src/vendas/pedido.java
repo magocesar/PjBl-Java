@@ -1,8 +1,11 @@
 package vendas;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+import persistencia.persistencia;
 import personas.Atendente;
 import personas.Cliente;
 import produtos.Produto;
@@ -12,6 +15,16 @@ public class pedido implements Serializable{
   private Cliente cliente; 
 
   private ArrayList<Produto> produtos = new ArrayList<Produto>(); 
+
+  public pedido(Atendente atendente, Cliente cliente, ArrayList<Produto> produtos) throws FileNotFoundException, ClassNotFoundException, IOException{
+    this.atendente = atendente; 
+    this.cliente = cliente; 
+    this.produtos = produtos; 
+  }
+
+  public void salvaosprodutos() throws FileNotFoundException, IOException{
+   persistencia.SalvaPedidos(this.produtos);
+ }
 
   public Atendente getAtendente(){
     return atendente; 
@@ -35,12 +48,6 @@ public class pedido implements Serializable{
 
   public void setProdutos(ArrayList<Produto> produtos) {
     this.produtos = produtos;
-  }
-  
-  public pedido(Atendente atendente, Cliente cliente, ArrayList<Produto> produtos){
-    this.atendente = atendente; 
-    this.cliente = cliente; 
-    this.produtos = produtos; 
   }
 
   public void exibirPedido(){
