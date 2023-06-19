@@ -1,13 +1,16 @@
 package estoque;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 import excep.NoIdInDatabaseException;
 import produtos.*;
 import personas.*;
 import vendas.*;
+import persistencia.*;
 
 public class estoque {
     private int id = 1;
+
     private ArrayList<produtoIndustrializado> produtoIndustrializado = new ArrayList<produtoIndustrializado>();
 
     private ArrayList<produtoProduzido> produtoProduzido = new ArrayList<produtoProduzido>();
