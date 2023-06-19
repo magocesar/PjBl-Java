@@ -12,10 +12,15 @@ import personas.*;
 import produtos.*;
 
 public class persistencia {
-    
+
+    File produtoIndustrializados = new File("produtoIndustrializados.txt");
 
     public void SalvaIndustrializados(ArrayList<produtoIndustrializado> list){
-        File produtoIndustrializados = new File("produtoIndustrializados.txt");
+        
+    }
+
+    public void LerIndustrializados(){
+
     }
     
 
